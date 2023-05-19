@@ -4,15 +4,6 @@
 
 using namespace std;
 
-struct ListNode
-{
-    int val;
-    ListNode *next;
-    ListNode() : val(0), next(nullptr) {}
-    ListNode(int x) : val(x), next(nullptr) {}
-    ListNode(int x, ListNode *next) : val(x), next(next) {}
-};
-
 ListNode *removeElements(ListNode *head, int val)
 {
     ListNode *feakHead = new ListNode(0, head), *ptr = feakHead;
@@ -28,7 +19,7 @@ ListNode *removeElements(ListNode *head, int val)
     return feakHead->next;
 }
 
-void create_link(vector<int> &nums, ListNode *head)
+void createLink(vector<int> &nums, ListNode *head)
 {
     ListNode *ptr = head;
     for (int num : nums)
@@ -39,7 +30,7 @@ void create_link(vector<int> &nums, ListNode *head)
     }
 }
 
-void delete_link(ListNode *head)
+void deleteLink(ListNode *head)
 {
     ListNode *ptr = head->next, *tmp;
     while (ptr != nullptr)
@@ -73,28 +64,28 @@ int main(int argc, char **argv)
     nums = {1, 2, 6, 3, 4, 5, 6};
     val = 6;
     target = {1, 2, 3, 4, 5};
-    create_link(nums, head);
+    createLink(nums, head);
     head = removeElements(head, val);
     cout << "Case 1: " << check(link2vector(head), target) << endl;
-    delete_link(head);
+    deleteLink(head);
 
     // case 2
     nums = {};
     val = 1;
     target = {};
-    create_link(nums, head);
+    createLink(nums, head);
     head = removeElements(head, val);
     cout << "Case 2: " << check(link2vector(head), target) << endl;
-    delete_link(head);
+    deleteLink(head);
 
     // case 3
     nums = {7, 7, 7, 7};
     val = 7;
     target = {};
-    create_link(nums, head);
+    createLink(nums, head);
     head = removeElements(head, val);
     cout << "Case 3: " << check(link2vector(head), target) << endl;
-    delete_link(head);
+    deleteLink(head);
 
     delete head;
 }

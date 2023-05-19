@@ -1,8 +1,5 @@
-#include <iostream>
-#include <vector>
 #include "utils.h"
 
-using namespace std;
 
 int searchInsert(vector<int>& nums, int target)
 {

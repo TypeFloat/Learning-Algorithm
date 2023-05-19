@@ -1,8 +1,5 @@
-#include <iostream>
-#include <vector>
 #include "utils.h"
 
-using namespace std;
 
 ListNode *removeElements(ListNode *head, int val)
 {

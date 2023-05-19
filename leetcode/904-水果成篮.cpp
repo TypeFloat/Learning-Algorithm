@@ -1,8 +1,5 @@
-#include <iostream>
-#include <vector>
 #include "utils.h"
 
-using namespace std;
 
 int totalFruit(vector<int> &fruits)
 {

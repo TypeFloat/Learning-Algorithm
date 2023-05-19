@@ -1,3 +1,9 @@
+#include <iostream>
+#include <vector>
+#include <unordered_map>
+
+using namespace std;
+
 template<class T>
 bool check(const T& value1, const T& value2)
 {

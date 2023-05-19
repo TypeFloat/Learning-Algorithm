@@ -1,8 +1,5 @@
-#include <iostream>
-#include <vector>
 #include "utils.h"
 
-using namespace std;
 
 int minSubArrayLen(int target, vector<int>& nums)
 {

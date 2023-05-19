@@ -17,6 +17,10 @@ private:
 public:
     ListNode *head;
     MyLinkedList(): head(new ListNode()), size(0) {}
+    ~MyLinkedList()
+    {
+        delete head;
+    }
 
     int get(int index)
     {   
@@ -56,32 +60,6 @@ public:
         delete next;
     }
 };
-
-vector<int> link2vector(ListNode *head)
-{
-    vector<int> rtn;
-    ListNode *ptr = head->next;
-    if (ptr == nullptr)
-        return rtn;
-    while (ptr != nullptr)
-    {
-        rtn.emplace_back(ptr->val);
-        ptr = ptr->next;
-    }
-    return rtn;
-}
-
-void deleteLink(ListNode *head)
-{
-    ListNode *ptr = head->next, *tmp;
-    while (ptr != nullptr)
-    {
-        tmp = ptr;
-        ptr = ptr->next;
-        delete tmp;
-    }
-    delete head;
-}
 
 int main(int argc, char **argv)
 {

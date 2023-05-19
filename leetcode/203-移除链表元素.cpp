@@ -16,41 +16,6 @@ ListNode *removeElements(ListNode *head, int val)
     return feakHead->next;
 }
 
-void createLink(vector<int> &nums, ListNode *head)
-{
-    ListNode *ptr = head;
-    for (int num : nums)
-    {
-        ptr->val = num;
-        ptr->next = new ListNode();
-        ptr = ptr->next;
-    }
-}
-
-void deleteLink(ListNode *head)
-{
-    ListNode *ptr = head->next, *tmp;
-    while (ptr != nullptr)
-    {
-        tmp = ptr;
-        ptr = ptr->next;
-        delete tmp;
-    }
-
-}
-
-vector<int> link2vector(ListNode *head)
-{
-    vector<int> rtn;
-    ListNode *ptr = head;
-    while (ptr->next != nullptr)
-    {
-        rtn.emplace_back(ptr->val);
-        ptr = ptr->next;
-    }
-    return rtn;
-}
-
 int main(int argc, char **argv)
 {
     ListNode *head = new ListNode();
@@ -62,7 +27,7 @@ int main(int argc, char **argv)
     val = 6;
     target = {1, 2, 3, 4, 5};
     createLink(nums, head);
-    head = removeElements(head, val);
+    head->next = removeElements(head->next, val);
     cout << "Case 1: " << check(link2vector(head), target) << endl;
     deleteLink(head);
 
@@ -71,7 +36,7 @@ int main(int argc, char **argv)
     val = 1;
     target = {};
     createLink(nums, head);
-    head = removeElements(head, val);
+    head->next = removeElements(head->next, val);
     cout << "Case 2: " << check(link2vector(head), target) << endl;
     deleteLink(head);
 
@@ -80,7 +45,7 @@ int main(int argc, char **argv)
     val = 7;
     target = {};
     createLink(nums, head);
-    head = removeElements(head, val);
+    head->next = removeElements(head->next, val);
     cout << "Case 3: " << check(link2vector(head), target) << endl;
     deleteLink(head);
 

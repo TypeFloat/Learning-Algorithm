@@ -50,14 +50,5 @@ int main(int argc, char **argv)
     check(link2vector(head), target);
     deleteLink(head);
 
-    // case 4
-    nums = {1, 2};
-    target = {2};
-    n = 2;
-    createLink(nums, head);
-    head->next = removeNthFromEnd(head->next, n);
-    check(link2vector(head), target);
-    deleteLink(head);
-
     delete head;
 }

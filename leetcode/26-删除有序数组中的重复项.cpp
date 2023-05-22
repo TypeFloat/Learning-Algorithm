@@ -23,10 +23,10 @@ int main(int argc, char **argv)
     // case1
     nums = vector<int>{1, 1, 2};
     target = vector<int>{1, 2};
-    cout << "Case 1: " << check(vector<int>(nums.begin(), nums.begin()+removeDuplicates(nums)), target) << endl;
+    check(vector<int>(nums.begin(), nums.begin()+removeDuplicates(nums)), target);
 
     // case2
     nums = vector<int>{0, 0, 1, 1, 1, 2, 2, 3, 3, 4};
     target = vector<int>{0, 1, 2, 3, 4};
-    cout << "Case 2: " << check(vector<int>(nums.begin(), nums.begin()+removeDuplicates(nums)), target) << endl;
+    check(vector<int>(nums.begin(), nums.begin()+removeDuplicates(nums)), target);
 }

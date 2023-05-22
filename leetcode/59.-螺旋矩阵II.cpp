@@ -35,10 +35,10 @@ int main(int argc, char **argv)
     // case 1
     n = 3;
     target = {{1, 2, 3}, {8, 9, 4}, {7, 6, 5}};
-    cout << "Case 1: " << check(generateMatrix(n), target) << endl;
+    check(generateMatrix(n), target);
     
     // case 2
     n = 1;
     target = {{1}};
-    cout << "Case 2: " << check(generateMatrix(n), target) << endl;
+    check(generateMatrix(n), target);
 }

@@ -63,17 +63,17 @@ int main(int argc, char **argv)
     s = "ADOBECODEBANC";
     t = "ABC";
     target = "BANC";
-    cout << "Case 1: " << check(target, minWindow(s, t)) << endl;
+    check(target, minWindow(s, t));
 
     // case 2
     s = "a";
     t = "a";
     target = "a";
-    cout << "Case 2: " << check(target, minWindow(s, t)) << endl;
+    check(target, minWindow(s, t));
 
     // case 3
     s = "a";
     t = "aa";
     target = "";
-    cout << "Case 3: " << check(target, minWindow(s, t)) << endl;
+    check(target, minWindow(s, t));
 }

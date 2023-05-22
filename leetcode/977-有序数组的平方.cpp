@@ -33,10 +33,10 @@ int main(int argc, char **argv)
     // case 1
     nums = vector<int>{-4, -1, 0, 3, 10};
     target = vector<int>{0, 1, 9, 16, 100};
-    cout << "Case 1: " << check(sortedSquares(nums), target) << endl;
+    check(sortedSquares(nums), target);
 
     // case 2
     nums = vector<int>{-7, -3, 2, 3, 11};
     target = vector<int>{4, 9, 9, 49, 121};
-    cout << "Case 2: " << check(sortedSquares(nums), target) << endl;
+    check(sortedSquares(nums), target);
 }

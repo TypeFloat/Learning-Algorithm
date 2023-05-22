@@ -25,11 +25,11 @@ int main(int argc, char **argv)
     nums = vector<int>{3, 2, 2, 3};
     val = 3;
     target = vector<int>{2, 2};
-    cout << "Case 1: " << check(vector<int>(nums.begin(), nums.begin()+removeElement(nums, val)), target) << endl;
+    check(vector<int>(nums.begin(), nums.begin()+removeElement(nums, val)), target);
 
     // case2
     nums = vector<int>{0, 1, 2, 2, 3, 0, 4, 2};
     val = 2;
     target = vector<int>{0, 1, 3, 0, 4};
-    cout << "Case 2: " << check(vector<int>(nums.begin(), nums.begin()+removeElement(nums, val)), target) << endl;
+    check(vector<int>(nums.begin(), nums.begin()+removeElement(nums, val)), target);
 }

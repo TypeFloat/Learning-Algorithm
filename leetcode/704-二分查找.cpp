@@ -29,11 +29,11 @@ int main(int argc, char **argv)
     nums = vector<int>{-1, 0, 3, 5, 9, 12};
     target = 9;
     output = 4;
-    cout << "Case 1: " << check(search(nums, target), output) << endl;
+    check(search(nums, target), output);
 
     // case 2
     nums = vector<int>{-1, 0, 3, 5, 9, 12};
     target = 2;
     output = -1;
-    cout << "Case 2: " << check(search(nums, target), output) << endl;
+    check(search(nums, target), output);
 }

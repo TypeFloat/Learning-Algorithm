@@ -28,10 +28,10 @@ int main(int argc, char **argv)
     // case 1
     x = 4;
     output = 2;
-    cout << "Case 1: " << check(mySqrt(x), output) << endl;
+    check(mySqrt(x), output);
 
     // case 2
     x = 8;
     output = 2;
-    cout << "Case 2: " << check(mySqrt(x), output) << endl;
+    check(mySqrt(x), output);
 }

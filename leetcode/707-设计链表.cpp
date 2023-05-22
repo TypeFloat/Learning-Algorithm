@@ -69,33 +69,33 @@ int main(int argc, char **argv)
     // case 1
     target = {};
     MyLinkedList myLinkedList = MyLinkedList();
-    cout << "Case 1: " << check(link2vector(myLinkedList.head), target) << endl;
+    check(link2vector(myLinkedList.head), target);
 
     // case 2
     target = {1};
     myLinkedList.addAtHead(1);
-    cout << "Case 2: " << check(link2vector(myLinkedList.head), target) << endl;
+    check(link2vector(myLinkedList.head), target);
 
     // case 3
     target = {1, 3};
     myLinkedList.addAtTail(3);
-    cout << "Case 3: " << check(link2vector(myLinkedList.head), target) << endl;
+    check(link2vector(myLinkedList.head), target);
 
     // case 4
     target = {1, 2, 3};
     myLinkedList.addAtIndex(1, 2);
-    cout << "Case 4: " << check(link2vector(myLinkedList.head), target) << endl;
+    check(link2vector(myLinkedList.head), target);
 
     // case 5
-    cout << "Case 5: " << check(myLinkedList.get(1), 2) << endl;
+    check(myLinkedList.get(1), 2);
 
     // case 6
     target = {1, 3};
     myLinkedList.deleteAtIndex(1);
-    cout << "Case 6: " << check(link2vector(myLinkedList.head), target) << endl;
+    check(link2vector(myLinkedList.head), target);
 
     // case 7
-    cout << "Case 7: " << check(myLinkedList.get(1), 3) << endl;
+    check(myLinkedList.get(1), 3);
 
     deleteLink(myLinkedList.head);
 }

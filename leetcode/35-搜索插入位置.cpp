@@ -30,17 +30,17 @@ int main(int argc, char **argv)
     nums = vector<int>{1, 3, 5, 6};
     target = 5;
     output = 2;
-    cout << "Case 1: " << check(searchInsert(nums, target), output) << endl;
+    check(searchInsert(nums, target), output);
 
     // case 2
     nums = {1, 3, 5, 6};
     target = 2;
     output = 1;
-    cout << "Case 2: " << check(searchInsert(nums, target), output) << endl;
+    check(searchInsert(nums, target), output);
 
     // case 3
     nums = {1, 3, 5, 6};
     target = 7;
     output = 4;
-    cout << "Case 3: " << check(searchInsert(nums, target), output) << endl;
+    check(searchInsert(nums, target), output);
 }

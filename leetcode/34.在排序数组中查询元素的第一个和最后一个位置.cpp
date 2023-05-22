@@ -51,17 +51,17 @@ int main(int argc, char **argv)
     nums = vector<int>{5, 7, 7, 8, 8, 10};
     target = 8;
     output = vector<int>{3, 4};
-    cout << "Case 1: " << check(searchRange(nums, target), output) << endl;
+    check(searchRange(nums, target), output);
 
     // case 2
     nums = vector<int>{5, 7, 7, 8, 8, 10};
     target = 6;
     output = vector<int>{-1, -1};
-    cout << "Case 2: " << check(searchRange(nums, target), output) << endl;
+    check(searchRange(nums, target), output);
 
     // case 3
     nums = vector<int>{};
     target = 0;
     output = vector<int>{-1, -1};
-    cout << "Case 3: " << check(searchRange(nums, target), output) << endl;
+    check(searchRange(nums, target), output);
 }

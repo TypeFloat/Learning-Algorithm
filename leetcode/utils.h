@@ -3,12 +3,15 @@
 #include <unordered_map>
 #include <algorithm>
 
+
 using namespace std;
 
-template<class T>
-bool check(const T& value1, const T& value2)
+template<typename T>
+void check(const T& value1, const T& value2)
 {
-    return value1 == value2;
+    static int calledTime = 0;
+    calledTime += 1;
+    cout << "Case " << calledTime << ": " << (value1 == value2 ? "true" : "false") << endl;
 }
 
 struct ListNode

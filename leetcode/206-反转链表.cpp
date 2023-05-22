@@ -21,7 +21,7 @@ int main(int argc, char **argv)
     createLink(nums, head);
     head->next = reverseList(head->next);
     reverse(nums.begin(), nums.end());
-    cout << "Case 1: " << check(link2vector(head), nums) << endl;
+    check(link2vector(head), nums);
     deleteLink(head);
 
     // case 2
@@ -29,7 +29,7 @@ int main(int argc, char **argv)
     createLink(nums, head);
     head->next = reverseList(head->next);
     reverse(nums.begin(), nums.end());
-    cout << "Case 2: " << check(link2vector(head), nums) << endl;
+    check(link2vector(head), nums);
     deleteLink(head);
 
     // case 3
@@ -37,7 +37,7 @@ int main(int argc, char **argv)
     createLink(nums, head);
     head->next = reverseList(head->next);
     reverse(nums.begin(), nums.end());
-    cout << "Case 3: " << check(link2vector(head), nums) << endl;
+    check(link2vector(head), nums);
     deleteLink(head);
 
     delete head;

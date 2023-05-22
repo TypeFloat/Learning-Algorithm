@@ -46,17 +46,17 @@ int main(int argc, char **argv)
     s = "ab#c";
     t = "ad#c";
     target = true;
-    cout << "Case 1: " << check(target, backspaceCompare(s, t)) << endl;
+    check(target, backspaceCompare(s, t));
     
     // case 2
     s = "ab##";
     t = "c#d#";
     target = true;
-    cout << "Case 2: " << check(target, backspaceCompare(s, t)) << endl;
+    check(target, backspaceCompare(s, t));
 
     // case 3
     s = "a#c";
     t = "b";
     target = false;
-    cout << "Case 3: " << check(target, backspaceCompare(s, t)) << endl;
+    check(target, backspaceCompare(s, t));
 }

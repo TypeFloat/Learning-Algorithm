@@ -29,10 +29,10 @@ int main(int argc, char **argv)
     // case1
     num = 16;
     target = true;
-    cout << "Case 1: " << check(isPerfectSquare(num), target) << endl;
+    check(isPerfectSquare(num), target);
 
     // case2
     num = 14;
     target = false;
-    cout << "Case 2: " << check(isPerfectSquare(num), target) << endl;
+    check(isPerfectSquare(num), target);
 }

@@ -28,7 +28,7 @@ int main(int argc, char **argv)
     target = {1, 2, 3, 4, 5};
     createLink(nums, head);
     head->next = removeElements(head->next, val);
-    cout << "Case 1: " << check(link2vector(head), target) << endl;
+    check(link2vector(head), target);
     deleteLink(head);
 
     // case 2
@@ -37,7 +37,7 @@ int main(int argc, char **argv)
     target = {};
     createLink(nums, head);
     head->next = removeElements(head->next, val);
-    cout << "Case 2: " << check(link2vector(head), target) << endl;
+    check(link2vector(head), target);
     deleteLink(head);
 
     // case 3
@@ -46,7 +46,7 @@ int main(int argc, char **argv)
     target = {};
     createLink(nums, head);
     head->next = removeElements(head->next, val);
-    cout << "Case 3: " << check(link2vector(head), target) << endl;
+    check(link2vector(head), target);
     deleteLink(head);
 
     delete head;

@@ -35,10 +35,10 @@ int main(int argc, char **argv)
     // case 1
     matrix = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
     target = {1, 2, 3, 6, 9, 8, 7, 4, 5};
-    cout << "Case 1: " << check(target, spiralOrder(matrix)) << endl;
+    check(target, spiralOrder(matrix));
 
     // case 2
     matrix = {{1, 2, 3, 4}, {5, 6, 7, 8}, {9, 10, 11, 12}};
     target = {1, 2, 3, 4, 8, 12, 11, 10, 9, 5, 6, 7};
-    cout << "Case 2: " << check(target, spiralOrder(matrix)) << endl;
+    check(target, spiralOrder(matrix));
 }

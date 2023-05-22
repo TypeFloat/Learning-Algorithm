@@ -30,17 +30,17 @@ int main(int argc, char **argv)
     nums = vector<int>{2, 3, 1, 2, 4, 3};
     target = 7;
     output = 2;
-    cout << "Case 1: " << check(output, minSubArrayLen(target, nums)) << endl;
+    check(output, minSubArrayLen(target, nums));
 
     // case 2
     nums = vector<int>{1, 4, 4};
     target = 4;
     output = 1;
-    cout << "Case 2: " << check(output, minSubArrayLen(target, nums)) << endl;
+    check(output, minSubArrayLen(target, nums));
 
     // case 3
     nums = vector<int>{1, 1, 1, 1, 1, 1, 1};
     target =11;
     output = 0;
-    cout << "Case 3: " << check(output, minSubArrayLen(target, nums)) << endl;
+    check(output, minSubArrayLen(target, nums));
 }

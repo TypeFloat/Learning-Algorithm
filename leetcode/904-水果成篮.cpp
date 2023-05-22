@@ -45,20 +45,20 @@ int main(int argc, char **argv)
     // case 1
     fruits = vector<int>{3, 1, 3, 2};
     target = 3;
-    cout << "Case 1: " << check(target, totalFruit(fruits)) << endl;
+    check(target, totalFruit(fruits));
 
     // case 2
     fruits = vector<int>{0, 1, 2, 2};
     target = 3;
-    cout << "Case 2: " << check(target, totalFruit(fruits)) << endl;
+    check(target, totalFruit(fruits));
 
     // case 3
     fruits = vector<int>{1, 2, 3, 2, 2};
     target = 4;
-    cout << "Case 3: " << check(target, totalFruit(fruits)) << endl;
+    check(target, totalFruit(fruits));
 
     // case 4
     fruits = vector<int>{3, 3, 3, 1, 2, 1, 1, 2, 3, 3, 4};
     target = 5;
-    cout << "Case 4: " << check(target, totalFruit(fruits)) << endl;
+    check(target, totalFruit(fruits));
 }

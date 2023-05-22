@@ -27,11 +27,11 @@ int main(int argc, char **argv)
     nums = vector<int>{0, 1, 0, 3, 12};
     target = vector<int>{1, 3, 12, 0, 0};
     moveZeroes(nums);
-    cout << "Case 1: " << check(target, nums) << endl;
+    check(target, nums);
 
     // case 2
     nums = vector<int>{0};
     target = vector<int>{0};
     moveZeroes(nums);
-    cout << "Case 2: " << check(target, nums) << endl;
+    check(target, nums);
 }

@@ -40,6 +40,7 @@ void deleteLink(ListNode *head)
     {
         tmp = ptr;
         ptr = ptr->next;
+        tmp = nullptr;
         delete tmp;
     }
     head->next = nullptr;

@@ -1,4 +1,7 @@
 #include "utils.h"
+#include "link.h"
+
+using namespace std;
 
 ListNode *swapPairs(ListNode *head)
 {
@@ -11,34 +14,32 @@ ListNode *swapPairs(ListNode *head)
     return nextNode;
 }
 
+void solution(vector<int> nums, vector<int> target)
+{
+    LinkList linkList;
+    linkList.createLink(nums);
+    linkList.head->next = swapPairs(linkList.head->next);
+    check(linkList.toVector(), target);
+    linkList.deleteLink();
+}
+
 int main(int argc, char **argv)
 {
     vector<int> nums, target;
-    ListNode *head = new ListNode();
+    
 
     // case 1
     nums = {1, 2, 3, 4};
     target = {2, 1, 4, 3};
-    createLink(nums, head);
-    head->next = swapPairs(head->next);
-    check(link2vector(head), target);
-    deleteLink(head);
+    solution(nums, target);
 
     // case 2
     nums = {};
     target = {};
-    createLink(nums, head);
-    head->next = swapPairs(head->next);
-    check(link2vector(head), target);
-    deleteLink(head);
+    solution(nums, target);
 
     // case 3
     nums = {1};
     target = {1};
-    createLink(nums, head);
-    head->next = swapPairs(head->next);
-    check(link2vector(head), target);
-    deleteLink(head);
-    
-    delete head;
+    solution(nums, target);
 }

@@ -1,4 +1,7 @@
 #include "utils.h"
+#include "link.h"
+
+using namespace std;
 
 ListNode *removeNthFromEnd(ListNode *head, int n)
 {
@@ -17,38 +20,36 @@ ListNode *removeNthFromEnd(ListNode *head, int n)
     return head;
 }
 
+void solution(vector<int> &nums, vector<int> &target, int n)
+{
+    LinkList linkList;
+    linkList.createLink(nums);
+    linkList.head->next = removeNthFromEnd(linkList.head->next, n);
+    linkList.size--;
+    check(linkList.toVector(), target);
+    linkList.deleteLink();
+}
+
 int main(int argc, char **argv)
 {
     vector<int> nums, target;
     int n;
-    ListNode *head = new ListNode();
 
     // case 1
     nums = {1, 2, 3, 4, 5};
     target = {1, 2, 3, 5};
     n = 2;
-    createLink(nums, head);
-    head->next = removeNthFromEnd(head->next, n);
-    check(link2vector(head), target);
-    deleteLink(head);
-
+    solution(nums, target, n);
+    
     // case 2
     nums = {1};
     target = {};
     n = 1;
-    createLink(nums, head);
-    head->next = removeNthFromEnd(head->next, n);
-    check(link2vector(head), target);
-    deleteLink(head);
+    solution(nums, target, n);
 
     // case 3
     nums = {1, 2};
     target = {1};
     n = 1;
-    createLink(nums, head);
-    head->next = removeNthFromEnd(head->next, n);
-    check(link2vector(head), target);
-    deleteLink(head);
-
-    delete head;
+    solution(nums, target, n);
 }

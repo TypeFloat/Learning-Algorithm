@@ -47,3 +47,15 @@ std::vector<int> LinkList::toVector(void)
     }
     return nums;
 }
+
+void LinkList::resetSize(void)
+{
+    int size = 0;
+    ListNode *ptr = this->head->next;
+    while (ptr != nullptr)
+    {
+        size++;
+        ptr = ptr->next;
+    }
+    this->size = size;
+}

@@ -20,18 +20,22 @@ int mySqrt(int x)
     return 0;
 }
 
+void solution(int x, int output)
+{
+    check(mySqrt(x), output);
+}
+
 int main(int argc, char **argv)
 {
-    int x;
-    int output;
+    int x, output;
 
     // case 1
     x = 4;
     output = 2;
-    check(mySqrt(x), output);
+    solution(x, output);
 
     // case 2
     x = 8;
     output = 2;
-    check(mySqrt(x), output);
+    solution(x, output);
 }

@@ -25,7 +25,7 @@ void solution(vector<int> &nums, vector<int> &target, int n)
     LinkList linkList;
     linkList.createLink(nums);
     linkList.head->next = removeNthFromEnd(linkList.head->next, n);
-    linkList.size--;
+    linkList.resetSize();
     check(linkList.toVector(), target);
     linkList.deleteLink();
 }

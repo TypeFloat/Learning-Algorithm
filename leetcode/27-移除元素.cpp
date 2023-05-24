@@ -1,5 +1,6 @@
 #include "utils.h"
 
+using namespace std;
 
 int removeElement(vector<int>& nums, int val)
 {
@@ -16,20 +17,25 @@ int removeElement(vector<int>& nums, int val)
     return slow;
 }
 
+void solution(vector<int> &nums, vector<int> &target, int val)
+{
+    check(vector<int>(nums.begin(), nums.begin()+removeElement(nums, val)), target);
+}
+
 int main(int argc, char **argv)
 {
     vector<int> nums, target;
     int val;
 
     // case1
-    nums = vector<int>{3, 2, 2, 3};
+    nums = {3, 2, 2, 3};
+    target = {2, 2};
     val = 3;
-    target = vector<int>{2, 2};
-    check(vector<int>(nums.begin(), nums.begin()+removeElement(nums, val)), target);
+    solution(nums, target, val);
 
     // case2
-    nums = vector<int>{0, 1, 2, 2, 3, 0, 4, 2};
+    nums = {0, 1, 2, 2, 3, 0, 4, 2};
+    target = {0, 1, 3, 0, 4};
     val = 2;
-    target = vector<int>{0, 1, 3, 0, 4};
-    check(vector<int>(nums.begin(), nums.begin()+removeElement(nums, val)), target);
+    solution(nums, target, val);
 }

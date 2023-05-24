@@ -1,5 +1,7 @@
 #include "utils.h"
 
+using namespace std;
+
 
 string minWindow(string s, string t)
 {
@@ -51,8 +53,12 @@ string minWindow(string s, string t)
         if (dict.find(s[right]) != dict.end())
             dict[s[right]] -= 1;
     }
-
     return string(s.begin() + minLeft, s.begin() + minRight + 1);
+}
+
+void solution(string &s, string &t, string &output)
+{
+    check(minWindow(s, t), output);
 }
 
 int main(int argc, char **argv)
@@ -63,17 +69,17 @@ int main(int argc, char **argv)
     s = "ADOBECODEBANC";
     t = "ABC";
     target = "BANC";
-    check(target, minWindow(s, t));
+    solution(s, t, target);
 
     // case 2
     s = "a";
     t = "a";
     target = "a";
-    check(target, minWindow(s, t));
+    solution(s, t, target);
 
     // case 3
     s = "a";
     t = "aa";
     target = "";
-    check(target, minWindow(s, t));
+    solution(s, t, target);
 }

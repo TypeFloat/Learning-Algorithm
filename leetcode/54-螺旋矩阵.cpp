@@ -1,5 +1,7 @@
 #include "utils.h"
 
+using namespace std;
+
 
 vector<int> spiralOrder(vector<vector<int>> &matrix)
 {
@@ -27,6 +29,11 @@ vector<int> spiralOrder(vector<vector<int>> &matrix)
     return rtn;
 }
 
+void solution(vector<vector<int>> &matrix, vector<int> &target)
+{
+    check(spiralOrder(matrix), target);
+}
+
 int main(int argc, char **argv)
 {
     vector<vector<int>> matrix;
@@ -35,10 +42,10 @@ int main(int argc, char **argv)
     // case 1
     matrix = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
     target = {1, 2, 3, 6, 9, 8, 7, 4, 5};
-    check(target, spiralOrder(matrix));
+    solution(matrix, target);
 
     // case 2
     matrix = {{1, 2, 3, 4}, {5, 6, 7, 8}, {9, 10, 11, 12}};
     target = {1, 2, 3, 4, 8, 12, 11, 10, 9, 5, 6, 7};
-    check(target, spiralOrder(matrix));
+    solution(matrix, target);
 }

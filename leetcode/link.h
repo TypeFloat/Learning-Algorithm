@@ -1,4 +1,4 @@
-#include <vector>
+#include "utils.h"
 
 
 struct ListNode
@@ -22,4 +22,5 @@ public:
     void deleteLink(void);
     ListNode *getNode(int index);
     std::vector<int> toVector(void);
+    void resetSize(void);
 };

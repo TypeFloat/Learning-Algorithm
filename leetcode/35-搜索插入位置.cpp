@@ -1,5 +1,7 @@
 #include "utils.h"
 
+using namespace std;
+
 
 int searchInsert(vector<int>& nums, int target)
 {
@@ -20,27 +22,31 @@ int searchInsert(vector<int>& nums, int target)
         return left;
 }
 
+void solution(vector<int> &nums, int output, int target)
+{
+    check(searchInsert(nums, target), output);
+}
+
 int main(int argc, char **argv)
 {
     vector<int> nums;
-    int target;
-    int output;
+    int target, output;
 
     // case 1
-    nums = vector<int>{1, 3, 5, 6};
+    nums = {1, 3, 5, 6};
     target = 5;
     output = 2;
-    check(searchInsert(nums, target), output);
-
+    solution(nums, output, target);
+    
     // case 2
     nums = {1, 3, 5, 6};
     target = 2;
     output = 1;
-    check(searchInsert(nums, target), output);
+    solution(nums, output, target);
 
     // case 3
     nums = {1, 3, 5, 6};
     target = 7;
     output = 4;
-    check(searchInsert(nums, target), output);
+    solution(nums, output, target);
 }

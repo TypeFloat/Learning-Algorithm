@@ -1,5 +1,7 @@
 #include "utils.h"
 
+using namespace std;
+
 
 int totalFruit(vector<int> &fruits)
 {
@@ -37,6 +39,11 @@ int totalFruit(vector<int> &fruits)
     return maxFruits;
 }
 
+void solution(vector<int> &fruits, int output)
+{
+    check(totalFruit(fruits), output);
+}
+
 int main(int argc, char **argv)
 {
     vector<int> fruits;
@@ -45,20 +52,20 @@ int main(int argc, char **argv)
     // case 1
     fruits = vector<int>{3, 1, 3, 2};
     target = 3;
-    check(target, totalFruit(fruits));
+    solution(fruits, target);
 
     // case 2
     fruits = vector<int>{0, 1, 2, 2};
     target = 3;
-    check(target, totalFruit(fruits));
+    solution(fruits, target);
 
     // case 3
     fruits = vector<int>{1, 2, 3, 2, 2};
     target = 4;
-    check(target, totalFruit(fruits));
+    solution(fruits, target);
 
     // case 4
     fruits = vector<int>{3, 3, 3, 1, 2, 1, 1, 2, 3, 3, 4};
     target = 5;
-    check(target, totalFruit(fruits));
+    solution(fruits, target);
 }

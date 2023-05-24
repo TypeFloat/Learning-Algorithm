@@ -21,6 +21,11 @@ bool isPerfectSquare(int num)
     return false;
 }
 
+void solution(int num, bool output)
+{
+    check(isPerfectSquare(num), output);
+}
+
 int main(int argc, char **argv)
 {
     int num;
@@ -29,10 +34,10 @@ int main(int argc, char **argv)
     // case1
     num = 16;
     target = true;
-    check(isPerfectSquare(num), target);
+    solution(num, target);
 
     // case2
     num = 14;
     target = false;
-    check(isPerfectSquare(num), target);
+    solution(num, target);
 }

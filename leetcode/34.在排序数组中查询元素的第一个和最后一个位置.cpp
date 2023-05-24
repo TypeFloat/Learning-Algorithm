@@ -1,5 +1,6 @@
 #include "utils.h"
 
+using namespace std;
 
 int binarySearch(vector<int>& nums, int target, int left, int right);
 
@@ -42,26 +43,31 @@ int binarySearch(vector<int>& nums, int target, int left, int right)
     return -1;
 }
 
+void solution(vector<int> &nums, vector<int> &output, int target)
+{
+    check(searchRange(nums, target), output);
+}
+
 int main(int argc, char **argv)
 {
     vector<int> nums, output;
     int target;
 
     // case 1
-    nums = vector<int>{5, 7, 7, 8, 8, 10};
+    nums = {5, 7, 7, 8, 8, 10};
+    output = {3, 4};
     target = 8;
-    output = vector<int>{3, 4};
-    check(searchRange(nums, target), output);
+    solution(nums, output, target);
 
     // case 2
-    nums = vector<int>{5, 7, 7, 8, 8, 10};
+    nums = {5, 7, 7, 8, 8, 10};
+    output = {-1, -1};
     target = 6;
-    output = vector<int>{-1, -1};
-    check(searchRange(nums, target), output);
+    solution(nums, output, target);
 
     // case 3
-    nums = vector<int>{};
+    nums = {};
+    output = {-1, -1};
     target = 0;
-    output = vector<int>{-1, -1};
-    check(searchRange(nums, target), output);
+    solution(nums, output, target);
 }

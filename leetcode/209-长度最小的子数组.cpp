@@ -1,5 +1,7 @@
 #include "utils.h"
 
+using namespace std;
+
 
 int minSubArrayLen(int target, vector<int>& nums)
 {
@@ -21,26 +23,31 @@ int minSubArrayLen(int target, vector<int>& nums)
     return minLength == nums.size() + 1 ? 0 : minLength;
 }
 
+void solution(vector<int> &nums, int target, int output)
+{
+    check(minSubArrayLen(target, nums), output);
+}
+
 int main(int argc, char **argv)
 {
     vector<int> nums;
     int target, output;
 
     // case 1
-    nums = vector<int>{2, 3, 1, 2, 4, 3};
+    nums = {2, 3, 1, 2, 4, 3};
     target = 7;
     output = 2;
-    check(output, minSubArrayLen(target, nums));
+    solution(nums, target, output);
 
     // case 2
-    nums = vector<int>{1, 4, 4};
+    nums = {1, 4, 4};
     target = 4;
     output = 1;
-    check(output, minSubArrayLen(target, nums));
+    solution(nums, target, output);
 
     // case 3
-    nums = vector<int>{1, 1, 1, 1, 1, 1, 1};
+    nums = {1, 1, 1, 1, 1, 1, 1};
     target =11;
     output = 0;
-    check(output, minSubArrayLen(target, nums));
+    solution(nums, target, output);
 }

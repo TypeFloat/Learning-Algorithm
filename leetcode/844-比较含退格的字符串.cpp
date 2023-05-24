@@ -1,5 +1,7 @@
 #include "utils.h"
 
+using namespace std;
+
 
 int backspace(string &s, int index)
 {
@@ -37,6 +39,11 @@ bool backspaceCompare(string s, string t)
     return ptrS == ptrT;
 }
 
+void solution(string &s, string &t, bool target)
+{
+    check(target, backspaceCompare(s, t));
+}
+
 int main(int argc, char **argv)
 {
     string s, t;
@@ -46,17 +53,17 @@ int main(int argc, char **argv)
     s = "ab#c";
     t = "ad#c";
     target = true;
-    check(target, backspaceCompare(s, t));
+    solution(s, t, target);
     
     // case 2
     s = "ab##";
     t = "c#d#";
     target = true;
-    check(target, backspaceCompare(s, t));
+    solution(s, t, target);
 
     // case 3
     s = "a#c";
     t = "b";
     target = false;
-    check(target, backspaceCompare(s, t));
+    solution(s, t, target);
 }

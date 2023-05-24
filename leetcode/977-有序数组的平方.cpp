@@ -1,5 +1,7 @@
 #include "utils.h"
 
+using namespace std;
+
 
 vector<int> sortedSquares(vector<int>& nums)
 {
@@ -26,17 +28,22 @@ vector<int> sortedSquares(vector<int>& nums)
     return rtn;
 }
 
+void solution(vector<int> &nums, vector<int> &target)
+{
+    check(sortedSquares(nums), target);
+}
+
 int main(int argc, char **argv)
 {
     vector<int> nums, target;
 
     // case 1
-    nums = vector<int>{-4, -1, 0, 3, 10};
-    target = vector<int>{0, 1, 9, 16, 100};
-    check(sortedSquares(nums), target);
+    nums = {-4, -1, 0, 3, 10};
+    target = {0, 1, 9, 16, 100};
+    solution(nums, target);
 
     // case 2
-    nums = vector<int>{-7, -3, 2, 3, 11};
-    target = vector<int>{4, 9, 9, 49, 121};
-    check(sortedSquares(nums), target);
+    nums = {-7, -3, 2, 3, 11};
+    target = {4, 9, 9, 49, 121};
+    solution(nums, target);
 }

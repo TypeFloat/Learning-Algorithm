@@ -1,4 +1,7 @@
 #include "utils.h"
+#include "link.h"
+
+using namespace std;
 
 
 ListNode *reverseList(ListNode *head)
@@ -11,34 +14,29 @@ ListNode *reverseList(ListNode *head)
     return rtn;
 }
 
+void solution(vector<int> &nums)
+{
+    LinkList linkList;
+    linkList.createLink(nums);
+    linkList.head->next = reverseList(linkList.head->next);
+    reverse(nums.begin(), nums.end());
+    check(linkList.toVector(), nums);
+    linkList.deleteLink();
+}
+
 int main(int argc, char **argv)
 {
-    ListNode *head = new ListNode();
     vector<int> nums;
 
     // case 1
     nums = {1, 2, 3, 4, 5};
-    createLink(nums, head);
-    head->next = reverseList(head->next);
-    reverse(nums.begin(), nums.end());
-    check(link2vector(head), nums);
-    deleteLink(head);
+    solution(nums);
 
     // case 2
     nums = {1, 2};
-    createLink(nums, head);
-    head->next = reverseList(head->next);
-    reverse(nums.begin(), nums.end());
-    check(link2vector(head), nums);
-    deleteLink(head);
+    solution(nums);
 
     // case 3
     nums = {};
-    createLink(nums, head);
-    head->next = reverseList(head->next);
-    reverse(nums.begin(), nums.end());
-    check(link2vector(head), nums);
-    deleteLink(head);
-
-    delete head;
+    solution(nums);
 }

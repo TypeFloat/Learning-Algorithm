@@ -1,5 +1,6 @@
 #include "utils.h"
 
+using namespace std;
 
 vector<vector<int>> generateMatrix(int n)
 {
@@ -27,6 +28,11 @@ vector<vector<int>> generateMatrix(int n)
     return matrix;
 }
 
+void solution(int n, vector<vector<int>> &target)
+{
+    check(generateMatrix(n), target);
+}
+
 int main(int argc, char **argv)
 {
     int n;
@@ -35,10 +41,10 @@ int main(int argc, char **argv)
     // case 1
     n = 3;
     target = {{1, 2, 3}, {8, 9, 4}, {7, 6, 5}};
-    check(generateMatrix(n), target);
+    solution(n, target);
     
     // case 2
     n = 1;
     target = {{1}};
-    check(generateMatrix(n), target);
+    solution(n, target);
 }

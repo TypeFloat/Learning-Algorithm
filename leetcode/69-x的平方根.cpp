@@ -1,6 +1,5 @@
 #include "utils.h"
 
-
 int mySqrt(int x)
 {
     // 乘方运算时可能导致溢出，因此要用长整形

@@ -19,7 +19,7 @@ int removeDuplicates(vector<int> &nums)
 
 void solution(vector<int> &nums, vector<int> &target)
 {
-    check(vector<int>(nums.begin(), nums.begin()+removeDuplicates(nums)), target);
+    check(vector<int>(nums.begin(), nums.begin() + removeDuplicates(nums)), target);
 }
 
 int main(int argc, char **argv)

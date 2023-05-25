@@ -3,7 +3,6 @@
 
 using namespace std;
 
-
 ListNode *getIntersectionNode(ListNode *headA, ListNode *headB)
 {
     if (headA == nullptr || headB == nullptr)

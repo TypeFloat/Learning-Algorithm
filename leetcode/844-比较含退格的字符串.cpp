@@ -2,7 +2,6 @@
 
 using namespace std;
 
-
 int backspace(string &s, int index)
 {
     if (s[index] == '#')
@@ -24,7 +23,7 @@ int backspace(string &s, int index)
 bool backspaceCompare(string s, string t)
 {
     int ptrS = s.size() - 1, ptrT = t.size() - 1;
-    while (ptrS>=0 && ptrT>=0)
+    while (ptrS >= 0 && ptrT >= 0)
     {
         ptrS = backspace(s, ptrS);
         ptrT = backspace(t, ptrT);
@@ -54,7 +53,7 @@ int main(int argc, char **argv)
     t = "ad#c";
     target = true;
     solution(s, t, target);
-    
+
     // case 2
     s = "ab##";
     t = "c#d#";

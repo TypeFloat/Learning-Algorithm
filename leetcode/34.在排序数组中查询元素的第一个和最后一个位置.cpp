@@ -2,21 +2,21 @@
 
 using namespace std;
 
-int binarySearch(vector<int>& nums, int target, int left, int right);
+int binarySearch(vector<int> &nums, int target, int left, int right);
 
-vector<int> searchRange(vector<int>& nums, int target)
+vector<int> searchRange(vector<int> &nums, int target)
 {
     int left = nums.size(), right = -1, low = 0, high = nums.size() - 1;
     // 使用的思路是不断在一个缩小的区间里寻找目标，每一次查找都是一次二分查找。
     do
     {
-        low = binarySearch(nums, target, 0, left-1);
+        low = binarySearch(nums, target, 0, left - 1);
         if (low != -1)
             left = low;
     } while (low != -1);
     do
     {
-        high = binarySearch(nums, target, right+1, nums.size()-1);
+        high = binarySearch(nums, target, right + 1, nums.size() - 1);
         if (high != -1)
             right = high;
     } while (high != -1);
@@ -27,7 +27,7 @@ vector<int> searchRange(vector<int>& nums, int target)
         return {left, right};
 }
 
-int binarySearch(vector<int>& nums, int target, int left, int right)
+int binarySearch(vector<int> &nums, int target, int left, int right)
 {
     int mid;
     while (left <= right)

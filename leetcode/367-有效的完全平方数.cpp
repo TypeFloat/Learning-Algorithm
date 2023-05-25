@@ -1,6 +1,5 @@
 #include "utils.h"
 
-
 bool isPerfectSquare(int num)
 {
     // 在数组搜索时的最小二乘，右侧为 len - 1，但此处不需要减一

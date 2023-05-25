@@ -2,7 +2,7 @@
 
 using namespace std;
 
-int removeElement(vector<int>& nums, int val)
+int removeElement(vector<int> &nums, int val)
 {
     int fast = 0, slow = 0;
     while (fast < nums.size())
@@ -19,7 +19,7 @@ int removeElement(vector<int>& nums, int val)
 
 void solution(vector<int> &nums, vector<int> &target, int val)
 {
-    check(vector<int>(nums.begin(), nums.begin()+removeElement(nums, val)), target);
+    check(vector<int>(nums.begin(), nums.begin() + removeElement(nums, val)), target);
 }
 
 int main(int argc, char **argv)

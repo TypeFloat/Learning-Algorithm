@@ -2,8 +2,7 @@
 
 using namespace std;
 
-
-int minSubArrayLen(int target, vector<int>& nums)
+int minSubArrayLen(int target, vector<int> &nums)
 {
     int left = 0, right = 0, sum = nums[0], minLength = nums.size() + 1;
     while (left <= right)
@@ -47,7 +46,7 @@ int main(int argc, char **argv)
 
     // case 3
     nums = {1, 1, 1, 1, 1, 1, 1};
-    target =11;
+    target = 11;
     output = 0;
     solution(nums, target, output);
 }

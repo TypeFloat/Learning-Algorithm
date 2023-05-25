@@ -2,8 +2,7 @@
 
 using namespace std;
 
-
-int search(vector<int>& nums, int target)
+int search(vector<int> &nums, int target)
 {
     // 不能用 unsigned int，因为 right 可能会小于 0
     int left = 0, right = nums.size() - 1, mid;
@@ -31,7 +30,7 @@ int main(int argc, char **argv)
     vector<int> nums;
     int target;
     int output;
-    
+
     // case 1
     nums = {-1, 0, 3, 5, 9, 12};
     target = 9;

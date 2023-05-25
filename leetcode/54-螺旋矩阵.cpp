@@ -2,11 +2,10 @@
 
 using namespace std;
 
-
 vector<int> spiralOrder(vector<vector<int>> &matrix)
 {
     int m = matrix.size(), n = matrix[0].size(), index = 0, top = 0, bottom = m - 1, left = 0, right = n - 1, row = -1, column = 0;
-    vector<int> rtn(m*n);
+    vector<int> rtn(m * n);
     while (index < m * n)
     {
         // 上行

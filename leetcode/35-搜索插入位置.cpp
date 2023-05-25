@@ -2,8 +2,7 @@
 
 using namespace std;
 
-
-int searchInsert(vector<int>& nums, int target)
+int searchInsert(vector<int> &nums, int target)
 {
     int left = 0, right = nums.size() - 1, mid;
     while (left < right)
@@ -37,7 +36,7 @@ int main(int argc, char **argv)
     target = 5;
     output = 2;
     solution(nums, output, target);
-    
+
     // case 2
     nums = {1, 3, 5, 6};
     target = 2;

@@ -3,7 +3,6 @@
 
 using namespace std;
 
-
 class MyLinkedList
 {
 private:
@@ -17,16 +16,17 @@ private:
             ptr = ptr->next;
         return ptr;
     }
+
 public:
     ListNode *head;
-    MyLinkedList(): head(new ListNode()), size(0) {}
+    MyLinkedList() : head(new ListNode()), size(0) {}
     ~MyLinkedList()
     {
         delete head;
     }
 
     int get(int index)
-    {   
+    {
         ListNode *ptr = get_node(index);
         return ptr == nullptr ? -1 : ptr->val;
     }

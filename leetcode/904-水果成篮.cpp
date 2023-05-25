@@ -2,7 +2,6 @@
 
 using namespace std;
 
-
 int totalFruit(vector<int> &fruits)
 {
     vector<int> fruitsCount = vector<int>(2), fruitsType = vector<int>(2, -1);

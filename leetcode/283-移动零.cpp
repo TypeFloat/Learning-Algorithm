@@ -2,8 +2,7 @@
 
 using namespace std;
 
-
-void moveZeroes(vector<int>& nums)
+void moveZeroes(vector<int> &nums)
 {
     int slow = 0, fast = 0;
     while (fast < nums.size())
@@ -11,7 +10,7 @@ void moveZeroes(vector<int>& nums)
         if (nums[fast] != 0)
         {
             nums[slow++] = nums[fast];
-        }    
+        }
         ++fast;
     }
     // 移动0，可以通过将后面的值赋0来实现，这样可以减少移动次数

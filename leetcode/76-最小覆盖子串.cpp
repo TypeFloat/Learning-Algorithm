@@ -2,7 +2,6 @@
 
 using namespace std;
 
-
 string minWindow(string s, string t)
 {
     unordered_map<char, int> dict;

@@ -40,7 +40,7 @@ int main(int argc, char **argv)
     target = {1, 2, 3, 5};
     n = 2;
     solution(nums, target, n);
-    
+
     // case 2
     nums = {1};
     target = {};

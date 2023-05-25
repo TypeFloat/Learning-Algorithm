@@ -2,8 +2,7 @@
 
 using namespace std;
 
-
-vector<int> sortedSquares(vector<int>& nums)
+vector<int> sortedSquares(vector<int> &nums)
 {
     if (nums.size() == 1)
         return {nums[0] * nums[0]};

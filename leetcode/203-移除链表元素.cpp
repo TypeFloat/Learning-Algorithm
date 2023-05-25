@@ -3,7 +3,6 @@
 
 using namespace std;
 
-
 ListNode *removeElements(ListNode *head, int val)
 {
     ListNode *feakHead = new ListNode(0, head), *ptr = feakHead;

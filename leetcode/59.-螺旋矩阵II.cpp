@@ -42,7 +42,7 @@ int main(int argc, char **argv)
     n = 3;
     target = {{1, 2, 3}, {8, 9, 4}, {7, 6, 5}};
     solution(n, target);
-    
+
     // case 2
     n = 1;
     target = {{1}};

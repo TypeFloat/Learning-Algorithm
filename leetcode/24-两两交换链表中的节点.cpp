@@ -26,7 +26,6 @@ void solution(vector<int> nums, vector<int> target)
 int main(int argc, char **argv)
 {
     vector<int> nums, target;
-    
 
     // case 1
     nums = {1, 2, 3, 4};

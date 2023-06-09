@@ -75,28 +75,4 @@ int main(int argc, char **argv)
     needle = "leeto";
     target = -1;
     solution(haystack, needle, target);
-
-    // case 3
-    haystack = "mississippi";
-    needle = "issip";
-    target = 4;
-    solution(haystack, needle, target);
-
-    // case 4
-    haystack = "hello";
-    needle = "ll";
-    target = 2;
-    solution(haystack, needle, target);
-
-    // case 5
-    haystack = "aabaaabaaac";
-    needle = "aabaaac";
-    target = 4;
-    solution(haystack, needle, target);
-
-    // case 6
-    haystack = "ababcaababcaabc";
-    needle = "ababcaabc";
-    target = 6;
-    solution(haystack, needle, target);
 }

@@ -6,6 +6,5 @@ set(CMAKE_BUILD_TYPE "Debug")
 set(CMAKE_EXPORT_COMPILE_COMMANDS 1)
 
 include_directories(utils)
-aux_source_directory(utils, DIR_SRC)
 
-add_executable(main ${TARGET_FILE} ${DIR_SRC})
+add_executable(main ${TARGET_FILE} utils/link.cpp utils/tree.cpp)

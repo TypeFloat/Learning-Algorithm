@@ -4,3 +4,4 @@ main*
 .cache
 build
 .clang-format
+.clang-tidy

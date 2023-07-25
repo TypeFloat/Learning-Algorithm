@@ -1,4 +1,3 @@
-#include <atomic>
 #include <vector>
 
 #include "utils.h"

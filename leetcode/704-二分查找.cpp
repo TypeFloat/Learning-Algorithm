@@ -18,14 +18,12 @@ int search(vector<int> &nums, int target) {
     return -1;
 }
 
-TEST(TEST704, CASE1) {
+TEST(Q704, CASE1) {
     vector<int> nums = {-1, 0, 3, 5, 9, 12};
-    int target = 9;
-    ASSERT_EQ(search(nums, target), 4);
+    ASSERT_EQ(search(nums, 9), 4);
 }
 
-TEST(TEST704, CASE2) {
+TEST(Q704, CASE2) {
     vector<int> nums = {-1, 0, 3, 5, 9, 12};
-    int target = 2;
-    ASSERT_EQ(search(nums, target), -1);
+    ASSERT_EQ(search(nums, 2), -1);
 }

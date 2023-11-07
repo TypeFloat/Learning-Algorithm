@@ -1,41 +1,51 @@
-#include "utils.h"
+#include <gtest/gtest.h>
+
+#include <vector>
 
 using namespace std;
 
-int removeElement(vector<int> &nums, int val)
-{
-    int fast = 0, slow = 0;
-    while (fast < nums.size())
-    {
-        if (nums[fast] != val)
-        {
-            nums[slow] = nums[fast];
-            ++slow;
-        }
-        ++fast;
+bool judge(vector<int> &nums, int vel, int len) {
+    for (int i = 0; i < len; ++i) {
+        if (nums[i] == vel) return false;
     }
-    return slow;
+    return true;
 }
 
-void solution(vector<int> &nums, vector<int> &target, int val)
-{
-    check(vector<int>(nums.begin(), nums.begin() + removeElement(nums, val)), target);
+int removeElement(vector<int> &nums, int vel) {
+    int left = 0;
+    int right = nums.size() - 1;
+    while (left <= right) {
+        if (nums[left] == vel) {
+            // 不需要进行交换，只需要覆盖即可
+            // swap(nums[left], nums[right]);
+            nums[left] = nums[right];
+            --right;
+        } else
+            ++left;
+    }
+    return left;
 }
 
-int main(int argc, char **argv)
-{
-    vector<int> nums, target;
-    int val;
+TEST(Q27, CASE1) {
+    vector<int> nums = {3, 2, 2, 3};
+    ASSERT_EQ(removeElement(nums, 3), 2);
+    ASSERT_TRUE(judge(nums, 3, 2));
+}
 
-    // case1
-    nums = {3, 2, 2, 3};
-    target = {2, 2};
-    val = 3;
-    solution(nums, target, val);
+TEST(Q27, CASE2) {
+    vector<int> nums = {0, 1, 2, 2, 3, 0, 4, 2};
+    ASSERT_EQ(removeElement(nums, 2), 5);
+    ASSERT_TRUE(judge(nums, 2, 5));
+}
 
-    // case2
-    nums = {0, 1, 2, 2, 3, 0, 4, 2};
-    target = {0, 1, 3, 0, 4};
-    val = 2;
-    solution(nums, target, val);
+TEST(Q27, CASE3) {
+    vector<int> nums = {};
+    ASSERT_EQ(removeElement(nums, 0), 0);
+    ASSERT_TRUE(judge(nums, 0, 0));
+}
+
+TEST(Q27, CASE4) {
+    vector<int> nums = {1};
+    ASSERT_EQ(removeElement(nums, 1), 0);
+    ASSERT_TRUE(judge(nums, 1, 0));
 }

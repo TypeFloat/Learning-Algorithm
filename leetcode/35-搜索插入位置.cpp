@@ -1,51 +1,39 @@
-#include "utils.h"
+#include <gtest/gtest.h>
+
+#include <vector>
 
 using namespace std;
 
-int searchInsert(vector<int> &nums, int target)
-{
-    int left = 0, right = nums.size() - 1, mid;
-    while (left < right)
-    {
-        mid = (right - left) / 2 + left;
+int searchInsert(vector<int> &nums, int target) {
+    int left = 0, right = nums.size() - 1;
+    while (left < right) {
+        int mid = (left + right) / 2;
         if (nums[mid] < target)
             left = mid + 1;
         else if (nums[mid] > target)
-            right = right - 1;
+            right = mid - 1;
         else
             return mid;
     }
-    if (nums[left] < target)
-        return left + 1;
-    else
-        return left;
+    return nums[left] >= target ? left : left + 1;
 }
 
-void solution(vector<int> &nums, int output, int target)
-{
-    check(searchInsert(nums, target), output);
+TEST(Q35, CASE1) {
+    vector<int> nums = {1, 3, 5, 6};
+    ASSERT_EQ(searchInsert(nums, 5), 2);
 }
 
-int main(int argc, char **argv)
-{
-    vector<int> nums;
-    int target, output;
+TEST(Q35, CASE2) {
+    vector<int> nums = {1, 3, 5, 6};
+    ASSERT_EQ(searchInsert(nums, 2), 1);
+}
 
-    // case 1
-    nums = {1, 3, 5, 6};
-    target = 5;
-    output = 2;
-    solution(nums, output, target);
+TEST(Q35, CASE3) {
+    vector<int> nums = {1, 3, 5, 6};
+    ASSERT_EQ(searchInsert(nums, 7), 4);
+}
 
-    // case 2
-    nums = {1, 3, 5, 6};
-    target = 2;
-    output = 1;
-    solution(nums, output, target);
-
-    // case 3
-    nums = {1, 3, 5, 6};
-    target = 7;
-    output = 4;
-    solution(nums, output, target);
+TEST(Q35, CASE4) {
+    vector<int> nums = {1, 3};
+    ASSERT_EQ(searchInsert(nums, 2), 1);
 }

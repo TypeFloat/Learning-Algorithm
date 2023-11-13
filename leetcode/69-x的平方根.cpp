@@ -1,40 +1,28 @@
-#include "utils.h"
+#include <gtest/gtest.h>
 
-int mySqrt(int x)
-{
-    // 乘方运算时可能导致溢出，因此要用长整形
-    long int left = 0, right = x, mid, res_1, res_2;
-    while (left <= right)
-    {
-        mid = (right - left) / 2 + left;
-        res_1 = mid * mid;
-        res_2 = (mid + 1) * (mid + 1);
-        if (res_2 <= x)
+#include "gtest/gtest.h"
+
+int mySqrt(int x) {
+    int left = 0, right = x;
+    long long mid;
+    long long squd;
+    while (left <= right) {
+        mid = (left + right) / 2;
+        squd = mid * mid;
+        if (squd < x)
             left = mid + 1;
-        else if (res_1 > x)
+        else if (squd > x)
             right = mid - 1;
         else
-            return mid;
+            return static_cast<int>(mid);
     }
-    return 0;
+    return static_cast<int>(left - 1);
 }
 
-void solution(int x, int output)
-{
-    check(mySqrt(x), output);
-}
+TEST(Q69, CASE1) { ASSERT_EQ(mySqrt(4), 2); }
 
-int main(int argc, char **argv)
-{
-    int x, output;
+TEST(Q69, CASE2) { ASSERT_EQ(mySqrt(8), 2); }
 
-    // case 1
-    x = 4;
-    output = 2;
-    solution(x, output);
+TEST(Q69, CASE3) { ASSERT_EQ(mySqrt(0), 0); }
 
-    // case 2
-    x = 8;
-    output = 2;
-    solution(x, output);
-}
+TEST(Q69, CASE4) { ASSERT_EQ(mySqrt(1), 1); }

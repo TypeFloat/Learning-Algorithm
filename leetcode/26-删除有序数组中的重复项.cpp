@@ -1,38 +1,32 @@
-#include "utils.h"
+#include <gtest/gtest.h>
+
+#include <vector>
 
 using namespace std;
 
-int removeDuplicates(vector<int> &nums)
-{
-    int slow = 0, fast = 1;
-    while (fast < nums.size())
-    {
-        if (nums[slow] != nums[fast])
-        {
-            ++slow;
-            nums[slow] = nums[fast];
-        }
+int removeDuplicates(vector<int> &nums) {
+    if (nums.size() == 0) return 0;
+    int low = 0, fast = 1;
+    while (fast < nums.size()) {
+        if (nums[low] != nums[fast]) nums[++low] = nums[fast];
         ++fast;
     }
-    return slow + 1;
+    return low + 1;
 }
 
-void solution(vector<int> &nums, vector<int> &target)
-{
-    check(vector<int>(nums.begin(), nums.begin() + removeDuplicates(nums)), target);
+void judge(vector<int> &nums, vector<int> &taget) {
+    int length = removeDuplicates(nums);
+    for (unsigned int i = 0; i < length; ++i) {
+        ASSERT_EQ(nums[i], taget[i]);
+    }
 }
 
-int main(int argc, char **argv)
-{
-    vector<int> nums, target;
+TEST(Q26, CASE1) {
+    vector<int> nums{1, 1, 2}, target{1, 2};
+    judge(nums, target);
+}
 
-    // case1
-    nums = {1, 1, 2};
-    target = {1, 2};
-    solution(nums, target);
-
-    // case2
-    nums = {0, 0, 1, 1, 1, 2, 2, 3, 3, 4};
-    target = {0, 1, 2, 3, 4};
-    solution(nums, target);
+TEST(Q26, CASE2) {
+    vector<int> nums{0, 0, 1, 1, 1, 2, 2, 3, 3, 4}, target{0, 1, 2, 3, 4};
+    judge(nums, target);
 }

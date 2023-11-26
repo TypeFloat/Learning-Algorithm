@@ -1,52 +1,41 @@
-#include "utils.h"
+#include <gtest/gtest.h>
+
+#include <vector>
 
 using namespace std;
 
-int minSubArrayLen(int target, vector<int> &nums)
-{
-    int left = 0, right = 0, sum = nums[0], minLength = nums.size() + 1;
-    while (left <= right)
-    {
-        if (sum >= target)
-        {
-            minLength = min(minLength, right - left + 1);
-            sum -= nums[left++];
-        }
-        else
-        {
-            if (right == nums.size() - 1)
-                break;
-            sum += nums[++right];
+int minSubArrayLen(int target, vector<int> &nums) {
+    int min_len = nums.size() + 1;
+    int left = 0, right = 0, sum = nums[0];
+    while (right < nums.size() && left <= right) {
+        if (sum < target) {
+            ++right;
+            if (right >= nums.size()) break;
+            sum += nums[right];
+        } else {
+            min_len = min(min_len, right - left + 1);
+            sum -= nums[left];
+            ++left;
         }
     }
-    return minLength == nums.size() + 1 ? 0 : minLength;
+    return min_len < nums.size() + 1 ? min_len : 0;
 }
 
-void solution(vector<int> &nums, int target, int output)
-{
-    check(minSubArrayLen(target, nums), output);
+TEST(Q209, CASE1) {
+    vector<int> nums = {2, 3, 1, 2, 4, 3};
+    ASSERT_EQ(minSubArrayLen(7, nums), 2);
 }
 
-int main(int argc, char **argv)
-{
-    vector<int> nums;
-    int target, output;
+TEST(Q209, CASE2) {
+    vector<int> nums = {1, 4, 4};
+    ASSERT_EQ(minSubArrayLen(4, nums), 1);
+}
+TEST(Q209, CASE3) {
+    vector<int> nums = {1, 1, 1, 1, 1, 1, 1};
+    ASSERT_EQ(minSubArrayLen(11, nums), 0);
+}
 
-    // case 1
-    nums = {2, 3, 1, 2, 4, 3};
-    target = 7;
-    output = 2;
-    solution(nums, target, output);
-
-    // case 2
-    nums = {1, 4, 4};
-    target = 4;
-    output = 1;
-    solution(nums, target, output);
-
-    // case 3
-    nums = {1, 1, 1, 1, 1, 1, 1};
-    target = 11;
-    output = 0;
-    solution(nums, target, output);
+TEST(Q209, CASE4) {
+    vector<int> nums = {1, 2, 3, 4, 5};
+    ASSERT_EQ(minSubArrayLen(15, nums), 5);
 }

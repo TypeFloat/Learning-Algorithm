@@ -1,84 +1,73 @@
-#include "utils.h"
+#include <gtest/gtest.h>
+
+#include <unordered_map>
 
 using namespace std;
 
-string minWindow(string s, string t)
-{
-    unordered_map<char, int> dict;
-    // 构建目标串字典
-    for (char ch : t)
-    {
-        if (dict.find(ch) == dict.end())
-            dict[ch] = 1;
-        else
+string minWindow(string s, string t) {
+    if (s.size() < t.size()) return "";
+    unordered_map<char, int> dict, window;
+    for (char ch : t) {
+        if (dict.find(ch) != dict.end())
             dict[ch] += 1;
+        else
+            dict[ch] = 1;
     }
-    int minLeft = -1, minRight = -1, minStrLen = s.size() + 1, left = 0, right = -1, charSum = t.size();
-    // 找到第一个串
-    while (charSum != 0)
-    {
-        ++right;
-        if (right >= s.size())
-            return "";
-        if (dict.find(s[right]) != dict.end())
-        {
-            if (dict[s[right]] > 0)
-                charSum -= 1;
-            dict[s[right]] -= 1;
-        }
-    }
-    // 继续寻找更优串
-    while (right < s.size())
-    {
-        // 优化子串
-        while (true)
-        {
-            if (dict.find(s[left]) != dict.end())
-            {
-                if (dict[s[left]] == 0)
-                    break;
-                else
-                    dict[s[left]] += 1;
+
+    int left = 0, min_left = 0, min_right = s.size();
+    for (int i = 0; i < s.size(); ++i) {
+        // 元素位于字典中，可能会改变当前窗口
+        if (dict.find(s[i]) != dict.end()) {
+            dict[s[i]] -= 1;
+            // 检查是否已经满足题目要求
+            // 如果大于0，明显不符合题目条件
+            // 如果小于0，说明对应的字母早已满足条件，不需要重复检查
+            if (dict[s[i]] <= 0) {
+                bool check = true;
+                for (auto iter = dict.begin(); iter != dict.end(); ++iter) {
+                    if (iter->second > 0) {
+                        check = false;
+                        break;
+                    }
+                }
+                // 如果已经满足，开始缩小窗口
+                if (check) {
+                    while (check) {
+                        if (dict.find(s[left]) != dict.end()) {
+                            // 窗口已无法缩小
+                            if (dict[s[left]] == 0)
+                                check = false;
+                            else
+                                dict[s[left++]] += 1;
+                        } else
+                            ++left;
+                    }
+                    // 更新最小窗口长度
+                    if (i - left < min_right - min_left) {
+                        min_left = left;
+                        min_right = i;
+                    }
+                }
             }
-            ++left;
         }
-        if (minStrLen > right - left + 1)
-        {
-            minStrLen = right - left + 1;
-            minLeft = left;
-            minRight = right;
-        }
-        ++right;
-        if (dict.find(s[right]) != dict.end())
-            dict[s[right]] -= 1;
     }
-    return string(s.begin() + minLeft, s.begin() + minRight + 1);
+    if (min_right != s.size())
+        return string(s.begin() + min_left, s.begin() + min_right + 1);
+    else
+        return "";
 }
 
-void solution(string &s, string &t, string &output)
-{
-    check(minWindow(s, t), output);
+TEST(Q76, CASE1) {
+    string s = "ADOBECODEBANC", t = "ABC", target = "BANC";
+    ASSERT_EQ(minWindow(s, t), target);
 }
 
-int main(int argc, char **argv)
-{
-    string s, t, target;
+TEST(Q76, CASE2) {
+    string s = "a", t = "a", target = "a";
+    ASSERT_EQ(minWindow(s, t), target);
+}
 
-    // case 1
-    s = "ADOBECODEBANC";
-    t = "ABC";
-    target = "BANC";
-    solution(s, t, target);
-
-    // case 2
-    s = "a";
-    t = "a";
-    target = "a";
-    solution(s, t, target);
-
-    // case 3
-    s = "a";
-    t = "aa";
-    target = "";
-    solution(s, t, target);
+TEST(Q76, CASE3) {
+    string s = "a", t = "aa", target = "";
+    ASSERT_EQ(minWindow(s, t), target);
 }

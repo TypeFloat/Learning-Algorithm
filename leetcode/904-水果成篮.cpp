@@ -1,70 +1,65 @@
-#include "utils.h"
+#include <gtest/gtest.h>
+
+#include <vector>
 
 using namespace std;
 
-int totalFruit(vector<int> &fruits)
-{
-    vector<int> fruitsCount = vector<int>(2), fruitsType = vector<int>(2, -1);
-    int left = 0, right = 0, maxFruits = 0, fruitBucket;
-    for (right = 0; right < fruits.size(); ++right)
-    {
-        // 如果是一种新水果，放入一个空框或者空出一个框
-        if (fruits[right] != fruitsType[0] && fruits[right] != fruitsType[1])
-        {
-            if (fruitsCount[0] == 0 || fruitsCount[1] == 0)
-            {
-                fruitBucket = fruitsCount[0] == 0 ? 0 : 1;
-                fruitsType[fruitBucket] = fruits[right];
-                fruitsCount[fruitBucket]++;
+int totalFruit(vector<int> &fruits) {
+    vector<int> kind(2, -1), num(2, 0);
+    int max_num = 0;
+    int left = 0;
+    kind[0] = fruits[0];
+    num[0] = 1;
+    int index;
+    for (int right = 1; right < fruits.size(); ++right) {
+        if (kind[0] == fruits[right] || kind[1] == fruits[right]) {
+            index = kind[0] == fruits[right] ? 0 : 1;
+            num[index] += 1;
+        } else if (num[0] == 0 || num[1] == 0) {
+            index = num[0] == 0 ? 0 : 1;
+            kind[index] = fruits[right];
+            num[index] = 1;
+        } else {
+            max_num = max(max_num, num[0] + num[1]);
+            while (!(num[0] == 0 || num[1] == 0)) {
+                index = kind[0] == fruits[left] ? 0 : 1;
+                num[index] -= 1;
+                ++left;
             }
-            else
-            {
-                while (fruitsCount[0] != 0 && fruitsCount[1] != 0)
-                {
-                    fruitBucket = fruits[left++] == fruitsType[0] ? 0 : 1;
-                    fruitsCount[fruitBucket]--;
-                }
-                fruitsType[fruitBucket] = fruits[right];
-                fruitsCount[fruitBucket]++;
-            }
+            index = num[0] == 0 ? 0 : 1;
+            num[index] = 1;
+            kind[index] = fruits[right];
         }
-        else
-        {
-            fruitBucket = fruits[right] == fruitsType[0] ? 0 : 1;
-            fruitsCount[fruitBucket]++;
-        }
-        maxFruits = max(maxFruits, right - left + 1);
     }
-    return maxFruits;
+    return max(max_num, num[0] + num[1]);
 }
 
-void solution(vector<int> &fruits, int output)
-{
-    check(totalFruit(fruits), output);
+TEST(Q904, CASE1) {
+    vector<int> fruits = {3, 1, 3, 2};
+    ASSERT_EQ(totalFruit(fruits), 3);
 }
 
-int main(int argc, char **argv)
-{
-    vector<int> fruits;
-    int target;
+TEST(Q904, CASE2) {
+    vector<int> fruits = {0, 1, 2, 2};
+    ASSERT_EQ(totalFruit(fruits), 3);
+}
 
-    // case 1
-    fruits = vector<int>{3, 1, 3, 2};
-    target = 3;
-    solution(fruits, target);
+TEST(Q904, CASE3) {
+    vector<int> fruits = {1, 2, 3, 2, 2};
+    ASSERT_EQ(totalFruit(fruits), 4);
+}
 
-    // case 2
-    fruits = vector<int>{0, 1, 2, 2};
-    target = 3;
-    solution(fruits, target);
+TEST(Q904, CASE4) {
+    vector<int> fruits = {3, 3, 3, 1, 2, 1, 1, 2, 3, 3, 4};
+    ASSERT_EQ(totalFruit(fruits), 5);
+}
 
-    // case 3
-    fruits = vector<int>{1, 2, 3, 2, 2};
-    target = 4;
-    solution(fruits, target);
+TEST(Q904, CASE5) {
+    vector<int> fruits = {0, 0, 1, 1};
+    ASSERT_EQ(totalFruit(fruits), 4);
+}
 
-    // case 4
-    fruits = vector<int>{3, 3, 3, 1, 2, 1, 1, 2, 3, 3, 4};
-    target = 5;
-    solution(fruits, target);
+TEST(Q904, CASE6) {
+    vector<int> fruits = {1, 0, 1, 4, 1, 4, 1, 2, 3};
+    ASSERT_EQ(totalFruit(fruits), 5);
 }

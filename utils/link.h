@@ -1,8 +1,7 @@
 #include "utils.h"
 
-class ListNode
-{
-public:
+class ListNode {
+   public:
     int val;
     ListNode *next;
     ListNode() : val(0), next(nullptr) {}
@@ -10,16 +9,20 @@ public:
     ListNode(int x, ListNode *next) : val(x), next(next) {}
 };
 
-class LinkList
-{
-public:
+class LinkList {
+   public:
     unsigned int size;
     ListNode *head;
     LinkList() : head(new ListNode()), size(0) {}
-    ~LinkList() { delete head; }
+    ~LinkList() {
+        this->deleteLink();
+        delete head;
+    }
     void createLink(std::vector<int> &nums);
     void deleteLink(void);
     ListNode *getNode(int index);
     std::vector<int> toVector(void);
+
+   private:
     void resetSize(void);
 };

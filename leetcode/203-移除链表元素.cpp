@@ -1,53 +1,48 @@
-#include "utils.h"
+#include <gtest/gtest.h>
+
+#include <vector>
+
 #include "link.h"
 
 using namespace std;
 
-ListNode *removeElements(ListNode *head, int val)
-{
-    ListNode *feakHead = new ListNode(0, head), *ptr = feakHead;
-    while (ptr != nullptr && ptr->next != nullptr)
-    {
-        if (ptr->next->val == val)
-        {
+ListNode *removeElements(ListNode *head, int val) {
+    ListNode *ptr = new ListNode(), *tmp;
+    ptr->next = head;
+    head = ptr;
+    while (ptr->next != nullptr) {
+        if (ptr->next->val == val) {
+            tmp = ptr->next;
             ptr->next = ptr->next->next;
-        }
-        else
+            delete tmp;
+        } else {
             ptr = ptr->next;
+        }
     }
-    return feakHead->next;
+    ptr = head->next;
+    delete head;
+    return ptr;
 }
 
-void solution(vector<int> &nums, vector<int> &target, int val)
-{
-    LinkList linkList;
-    linkList.createLink(nums);
-    linkList.head->next = removeElements(linkList.head->next, val);
-    linkList.resetSize();
-    check(linkList.toVector(), target);
-    linkList.deleteLink();
+bool judge(vector<int> &nums, vector<int> &target, int val) {
+    LinkList link_list;
+    link_list.createLink(nums);
+    link_list.head->next = removeElements(link_list.head->next, val);
+    return target == link_list.toVector();
 }
 
-int main(int argc, char **argv)
-{
-    vector<int> nums, target;
-    int val;
+TEST(Q203, CASE1) {
+    vector<int> nums = {1, 2, 6, 3, 4, 5, 6}, target = {1, 2, 3, 4, 5};
+    ASSERT_TRUE(judge(nums, target, 6));
+}
 
-    // case 1
-    nums = {1, 2, 6, 3, 4, 5, 6};
-    val = 6;
-    target = {1, 2, 3, 4, 5};
-    solution(nums, target, val);
+TEST(Q203, CASE2) {
+    vector<int> nums = {}, target = {};
+    ASSERT_TRUE(judge(nums, target, 1));
+}
 
-    // case 2
-    nums = {};
-    val = 1;
-    target = {};
-    solution(nums, target, val);
-
+TEST(Q203, CASE3) {
     // case 3
-    nums = {7, 7, 7, 7};
-    val = 7;
-    target = {};
-    solution(nums, target, val);
+    vector<int> nums = {7, 7, 7, 7}, target = {};
+    ASSERT_TRUE(judge(nums, target, 7));
 }

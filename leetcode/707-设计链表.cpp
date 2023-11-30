@@ -1,111 +1,59 @@
-#include "utils.h"
+#include <gtest/gtest.h>
+
 #include "link.h"
 
 using namespace std;
 
-class MyLinkedList
-{
-private:
-    int size;
-    ListNode *get_node(int index)
-    {
-        if (index >= size)
-            return nullptr;
-        ListNode *ptr = head;
-        for (int i = 0; i <= index; ++i)
+class MyLinkedList {
+   public:
+    MyLinkedList() {
+        this->size = 0;
+        this->head = new ListNode();
+    }
+    int get(int index) {
+        if (index + 1 > size) return -1;
+        ListNode *ptr = this->head;
+        for (int i = 0; i <= index; ++i) {
             ptr = ptr->next;
-        return ptr;
+        }
+        return ptr->val;
     }
-
-public:
-    ListNode *head;
-    MyLinkedList() : head(new ListNode()), size(0) {}
-    ~MyLinkedList()
-    {
-        delete head;
-    }
-
-    int get(int index)
-    {
-        ListNode *ptr = get_node(index);
-        return ptr == nullptr ? -1 : ptr->val;
-    }
-
-    void addAtHead(int val)
-    {
-        addAtIndex(0, val);
-    }
-
-    void addAtTail(int val)
-    {
-        addAtIndex(size, val);
-    }
-
-    void addAtIndex(int index, int val)
-    {
-        ListNode *ptr = get_node(index - 1);
-        if (ptr == nullptr)
-            return;
+    void addAtHead(int val) { addAtIndex(0, val); }
+    void addAtTail(int val) { addAtIndex(this->size, val); }
+    void addAtIndex(int index, int val) {
+        if (index > this->size) return;
+        ListNode *ptr = this->head;
+        for (int i = 0; i < index; ++i) {
+            ptr = ptr->next;
+        }
         ListNode *node = new ListNode(val);
         node->next = ptr->next;
         ptr->next = node;
-        ++size;
+        this->size += 1;
+    }
+    void deleteAtIndex(int index) {
+        if (index + 1 > size) return;
+        ListNode *ptr = this->head;
+        for (int i = 0; i < index; ++i) {
+            ptr = ptr->next;
+        }
+        ListNode *node = ptr->next;
+        ptr->next = ptr->next->next;
+        delete node;
+        this->size -= 1;
     }
 
-    void deleteAtIndex(int index)
-    {
-        if (index >= size)
-            return;
-        ListNode *ptr = get_node(index - 1);
-        ListNode *next = ptr->next;
-        ptr->next = ptr->next->next;
-        --size;
-        delete next;
-    }
+   private:
+    int size;
+    ListNode *head;
 };
 
-void solution(ListNode *head, vector<int> &target)
-{
-    LinkList linkList;
-    linkList.head = head;
-    linkList.resetSize();
-    check(linkList.toVector(), target);
-    linkList.head = nullptr;
-}
-
-int main(int argc, char **argv)
-{
-    vector<int> target;
-    bool isFeakNode = true;
-
-    // case 1
-    target = {};
+TEST(Q707, CASE1) {
     MyLinkedList myLinkedList = MyLinkedList();
-    solution(myLinkedList.head, target);
-
-    // case 2
-    target = {1};
     myLinkedList.addAtHead(1);
-    solution(myLinkedList.head, target);
-
-    // case 3
-    target = {1, 3};
     myLinkedList.addAtTail(3);
-    solution(myLinkedList.head, target);
-
-    // case 4
-    target = {1, 2, 3};
     myLinkedList.addAtIndex(1, 2);
-    solution(myLinkedList.head, target);
-
-    // case 5
-    check(myLinkedList.get(1), 2);
-
-    // case 6
-    target = {1, 3};
+    ASSERT_EQ(myLinkedList.get(1), 2);
     myLinkedList.deleteAtIndex(1);
-    solution(myLinkedList.head, target);
-
-    // case 7
-    solution(myLinkedList.head, target);
+    ASSERT_EQ(myLinkedList.get(1), 3);
 }

@@ -1,41 +1,43 @@
-#include "utils.h"
+#include <gtest/gtest.h>
+
+#include <vector>
+
 #include "link.h"
 
 using namespace std;
 
-ListNode *reverseList(ListNode *head)
-{
-    if (head == nullptr || head->next == nullptr)
-        return head;
-    ListNode *rtn = reverseList(head->next);
-    head->next->next = head;
+ListNode *reverseList(ListNode *head) {
+    if (head == nullptr || head->next == nullptr) return head;
+    ListNode *slow = head->next, *fast = head->next->next;
     head->next = nullptr;
-    return rtn;
+    while (fast != nullptr) {
+        slow->next = head;
+        head = slow;
+        slow = fast;
+        fast = fast->next;
+    }
+    slow->next = head;
+    return slow;
 }
 
-void solution(vector<int> &nums)
-{
-    LinkList linkList;
-    linkList.createLink(nums);
-    linkList.head->next = reverseList(linkList.head->next);
-    reverse(nums.begin(), nums.end());
-    check(linkList.toVector(), nums);
-    linkList.deleteLink();
+bool judge(vector<int> nums, vector<int> target) {
+    LinkList *link_list = new LinkList();
+    link_list->createLink(nums);
+    link_list->head->next = reverseList(link_list->head->next);
+    return target == link_list->toVector();
 }
 
-int main(int argc, char **argv)
-{
-    vector<int> nums;
+TEST(Q206, CASE1) {
+    vector<int> nums = {1, 2, 3, 4, 5}, target = {5, 4, 3, 2, 1};
+    ASSERT_TRUE(judge(nums, target));
+}
 
-    // case 1
-    nums = {1, 2, 3, 4, 5};
-    solution(nums);
+TEST(Q206, CASE2) {
+    vector<int> nums = {1, 2}, target = {2, 1};
+    ASSERT_TRUE(judge(nums, target));
+}
 
-    // case 2
-    nums = {1, 2};
-    solution(nums);
-
-    // case 3
-    nums = {};
-    solution(nums);
+TEST(Q206, CASE3) {
+    vector<int> nums = {}, target = {};
+    ASSERT_TRUE(judge(nums, target));
 }

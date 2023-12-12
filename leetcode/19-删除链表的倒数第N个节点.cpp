@@ -1,55 +1,43 @@
-#include "utils.h"
+#include <gtest/gtest.h>
+
+#include <vector>
+
 #include "link.h"
 
 using namespace std;
 
-ListNode *removeNthFromEnd(ListNode *head, int n)
-{
-    ListNode *slowPtr = head, *fastPtr = head;
-    while (n--)
-        fastPtr = fastPtr->next;
-    // 该种情况意味着要删除的节点是头节点，因此直接返回头节点的next
-    if (fastPtr == nullptr)
-        return head->next;
-    while (fastPtr->next != nullptr)
-    {
-        fastPtr = fastPtr->next;
-        slowPtr = slowPtr->next;
+ListNode *removeNthFromEnd(ListNode *head, int n) {
+    ListNode *dummy_head = new ListNode();
+    dummy_head->next = head;
+    ListNode *ptr = dummy_head;
+    for (int i = 0; i < n - 1; ++i) {
+        head = head->next;
     }
-    slowPtr->next = slowPtr->next->next;
-    return head;
+    while (head->next != nullptr) {
+        head = head->next;
+        ptr = ptr->next;
+    }
+    ptr->next = ptr->next->next;
+    return dummy_head->next;
 }
 
-void solution(vector<int> &nums, vector<int> &target, int n)
-{
-    LinkList linkList;
-    linkList.createLink(nums);
-    linkList.head->next = removeNthFromEnd(linkList.head->next, n);
-    linkList.resetSize();
-    check(linkList.toVector(), target);
-    linkList.deleteLink();
+void judge(vector<int> &nums, vector<int> &target, int n) {
+    LinkList *link_list = new LinkList();
+    link_list->createLink(nums);
+    link_list->head->next = removeNthFromEnd(link_list->head->next, n);
+    ASSERT_TRUE(target == link_list->toVector());
 }
 
-int main(int argc, char **argv)
-{
-    vector<int> nums, target;
-    int n;
+TEST(Q19, CASE1) {
+    vector<int> nums = {1, 2, 3, 4, 5}, target = {1, 2, 3, 5};
+    judge(nums, target, 2);
+}
 
-    // case 1
-    nums = {1, 2, 3, 4, 5};
-    target = {1, 2, 3, 5};
-    n = 2;
-    solution(nums, target, n);
-
-    // case 2
-    nums = {1};
-    target = {};
-    n = 1;
-    solution(nums, target, n);
-
-    // case 3
-    nums = {1, 2};
-    target = {1};
-    n = 1;
-    solution(nums, target, n);
+TEST(Q19, CASE2) {
+    vector<int> nums = {1}, target = {};
+    judge(nums, target, 1);
+}
+TEST(Q19, CASE3) {
+    vector<int> nums = {1, 2}, target = {1};
+    judge(nums, target, 1);
 }

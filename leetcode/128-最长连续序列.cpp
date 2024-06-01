@@ -2,7 +2,9 @@
 
 #include <unordered_set>
 #include <vector>
+
 using namespace std;
+
 class Solution {
    public:
     int longestConsecutive(vector<int> &nums) {
@@ -32,13 +34,13 @@ void test(vector<int> &nums, int target) {
     ASSERT_EQ(solution.longestConsecutive(nums), target);
 };
 
-TEST(Q1, CASE1) {
+TEST(Q128, CASE1) {
     vector<int> nums = {100, 4, 200, 1, 2, 3};
     int target = 4;
     test(nums, target);
 }
 
-TEST(Q2, CASE2) {
+TEST(Q128, CASE2) {
     vector<int> nums = {0, 3, 7, 2, 5, 8, 4, 6, 0, 1};
     int target = 9;
     test(nums, target);

@@ -3,7 +3,9 @@ project(algo)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_BUILD_TYPE "Debug")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=address")
 set(CMAKE_EXPORT_COMPILE_COMMANDS 1)
+
 
 find_package(GTest REQUIRED)
 include_directories(${GTEST_INCLUDE_DIRS})

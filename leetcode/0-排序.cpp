@@ -7,7 +7,21 @@
 
 using namespace std;
 
-void insertSort(vector<int> &nums) {}
+void insertSort(vector<int> &nums) {
+    // 插入排序的原理是认为数组首部是有序的
+    // 在有序数组中查找当前元素应该存在的位置，进行插入
+    // 通过n次循环完成排序，每次循环时遍历有序数组，时间复杂度为O(n^2)
+    // 在最好情况下，当前元素只需要与有序数组的末尾元素比较就可以确定插入位置，
+    // 因此最优时间复杂度为O(n)
+    // 仅在交换元素时使用了辅助空间，所以空间复杂度为O(1)
+    // 在寻找插入时，是从后往前遍历，可以保证元素的相对顺序，因此是稳定的排序算法
+    for (int i = 1; i < nums.size(); ++i) {
+        for (int j = i; j >= 1; --j) {
+            if (nums[j] < nums[j - 1]) swap(nums[j], nums[j - 1]);
+            else break;
+        }
+    }
+}
 
 void shellSort(vector<int> &nums) {}
 

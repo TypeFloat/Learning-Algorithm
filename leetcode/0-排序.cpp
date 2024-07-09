@@ -11,7 +11,24 @@ void insertSort(vector<int> &nums) {}
 
 void shellSort(vector<int> &nums) {}
 
-void selectionSort(vector<int> &nums) {}
+void selectionSort(vector<int> &nums) {
+    // 选择排序的原理是遍历当前数组，找到最大值
+    // 将其交换到数组尾部，完成一次排序
+    // 然后循环处理剩余数组
+    // 重复n次可以完成排序，所以时间复杂度是(n^2)
+    // 即使是有序的数组，也需要n次遍历，所以最优时间复杂度也是O(n^2)
+    // 仅在交换元素和存储当前最大值的下标时使用了辅助空间，所以空间复杂度是O(1)
+    int maxIdx;
+    for (int i = nums.size() - 1; i >= 0; --i) {
+        maxIdx = 0;
+        for (int j = 1; j <= i; ++j) {
+            // 在更新maxIdx时，无论是使用<还是<=，都无法实现稳定排序
+            // 因为在交换元素的时候，没有考虑被交换元素的位置
+            if (nums[maxIdx] < nums[j]) maxIdx = j;
+        }
+        swap(nums[i], nums[maxIdx]);
+    }
+}
 
 void heapSort(vector<int> &nums) {}
 

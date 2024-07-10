@@ -17,13 +17,33 @@ void insertSort(vector<int> &nums) {
     // 在寻找插入时，是从后往前遍历，可以保证元素的相对顺序，因此是稳定的排序算法
     for (int i = 1; i < nums.size(); ++i) {
         for (int j = i; j >= 1; --j) {
-            if (nums[j] < nums[j - 1]) swap(nums[j], nums[j - 1]);
-            else break;
+            if (nums[j] < nums[j - 1])
+                swap(nums[j], nums[j - 1]);
+            else
+                break;
         }
     }
 }
 
-void shellSort(vector<int> &nums) {}
+void shellSort(vector<int> &nums) {
+    // 希尔排序是对插入排序的改进，采用类似于分治的方法降低排序时的比较次数，从而进行加速
+    // 它的时间复杂度是O(nlogn)，最优时间复杂度、最差时间复杂度、空间复杂度与插入排序一致
+    // 但是希尔排序是一种不稳定的排序，因为它进行了分组比较，分组可能导致不稳定
+    int gap = nums.size() / 2;
+    while (gap != 0) {
+        for (int i = gap; i < 2 * gap; ++i) {
+            for (int j = i; j < nums.size(); j += gap) {
+                for (int k = j; k >= i % gap + 1; k -= gap) {
+                    if (nums[k] < nums[k - gap])
+                        swap(nums[k], nums[k - gap]);
+                    else
+                        break;
+                }
+            }
+        }
+        gap /= 2;
+    }
+}
 
 void selectionSort(vector<int> &nums) {
     // 选择排序的原理是遍历当前数组，找到最大值
@@ -73,8 +93,9 @@ void bucketSort(vector<int> &nums) {}
 void radixSort(vector<int> &nums) {}
 
 void test(std::function<void(vector<int> &)> sortFunc) {
-    vector<int> nums(1000, 0);
-    for (int i = 0; i < 1000; ++i) {
+    int n = 1000;
+    vector<int> nums(n, 0);
+    for (int i = 0; i < n; ++i) {
         nums[i] = random() % 2048;
     }
     vector<int> ans = nums;

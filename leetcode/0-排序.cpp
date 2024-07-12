@@ -64,7 +64,33 @@ void selectionSort(vector<int> &nums) {
     }
 }
 
-void heapSort(vector<int> &nums) {}
+void heapSort(vector<int> &nums) {
+    // 堆排序是利用数据结构堆进行排序的一种算法
+    // 堆分为大根堆和小根堆，大根堆中的每一棵子树的根节点都比其子节点的值大，小根堆反之
+    // 大根堆本身是一棵完全二叉树，因此在排序时不需要真实的建立一棵数，可以利用完全二叉树每层节点数量的性质
+    // 例如，大根堆要满足的条件是 arr[i] >= arr[2i+1] && arr[i] >= arr[2i+2]
+    // 堆排序在排序时平均、最好、最差时间复杂度都是O(nlogn)
+    // 不需要借助辅助空间，因此空间复杂度是O(1)
+    // 是一种不稳定的排序算法
+    int rootIdx, tmpIdx;
+    for (int i = nums.size() - 1; i >= 0; --i) {
+        for (int j = i; j > 0; --j) {
+            // 重建大根堆
+            // 当前节点是右节点
+            if (j % 2 != 0) {
+                rootIdx = (j - 1) / 2;
+                tmpIdx = nums[j - 1] > nums[j] ? j - 1 : j;
+                --j;
+            } else {
+                rootIdx = j / 2;
+                tmpIdx = j;
+            }
+            if (nums[rootIdx] < nums[tmpIdx]) swap(nums[rootIdx], nums[tmpIdx]);
+        }
+        // 此时数组最大元素出现在根节点，交换根节点与最后一个节点
+        swap(nums[0], nums[i]);
+    }
+}
 
 void bubbleSort(vector<int> &nums) {
     // 冒泡排序的原理是一个数字会持续向后移动，直到遇到遇到比他更大的数

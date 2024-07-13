@@ -110,7 +110,36 @@ void bubbleSort(vector<int> &nums) {
 
 void quickSort(vector<int> &nums) {}
 
-void mergeSort(vector<int> &nums) {}
+void mergeSort(vector<int> &nums) {
+    // 归并排序是一种分治思想的排序
+    // 把数组拆分后排序，再将两个子数组合并
+    // 一般是从上而下的递归，但是所有递归算法可以使用迭代写出来，如果是迭代的话，就是从下而上
+    // 与堆排序类似，采用了类似于树的调用链，时间复杂度为O(nlogn)
+    // 同时在排序时需要借助与原数组同样长度的辅助数组，因此空间复杂度为O(n)
+    int firstIdx, secondIdx, mergeIdx;
+    // 遍历递归分组长度，每次变为原长的两倍
+    for (int i = 1; i < nums.size(); i *= 2) {
+        // 按照当前间隔，两两一组，遍历子数组进行排序
+        vector<int> mergeArray(nums.size());
+        for (int j = 0; j < nums.size(); j += 2 * i) {
+            mergeIdx = j;
+            firstIdx = j;
+            secondIdx = j + i;
+            // 将排序好的数据填充到mergeArray中
+            for (int k = j; k < min<int>(j + 2 * i, mergeArray.size()); ++k) {
+                if (firstIdx >= j + i)
+                    mergeArray[k] = nums[secondIdx++];
+                else if (secondIdx >= j + i + i || secondIdx >= nums.size())
+                    mergeArray[k] = nums[firstIdx++];
+                else if (nums[firstIdx] < nums[secondIdx])
+                    mergeArray[k] = nums[firstIdx++];
+                else
+                    mergeArray[k] = nums[secondIdx++];
+            }
+        }
+        nums = mergeArray;
+    }
+}
 
 void countSort(vector<int> &nums) {}
 

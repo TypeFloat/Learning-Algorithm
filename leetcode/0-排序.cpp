@@ -1,9 +1,12 @@
+#include <__type_traits/is_swappable.h>
 #include <gtest/gtest.h>
 
 #include <algorithm>
 #include <array>
 #include <functional>
+#include <utility>
 #include <vector>
+#include <stack>
 
 using namespace std;
 
@@ -108,7 +111,34 @@ void bubbleSort(vector<int> &nums) {
     }
 }
 
-void quickSort(vector<int> &nums) {}
+void quickSort(vector<int> &nums) {
+    stack<pair<int, int>> sortStack;
+    int left, right, swapIndex, tmpRight;
+    pair<int, int> temp;
+    sortStack.push(pair<int, int>(0, nums.size() - 1));
+    while (!sortStack.empty()) {
+        auto temp = sortStack.top();
+        sortStack.pop();
+        swapIndex = temp.first;
+        left = swapIndex;
+        right = temp.second;
+        tmpRight = right;
+        if (swapIndex >= right) continue;
+
+        for (int i = left; i <= right; ++i) {
+            if (nums[i] <= nums[swapIndex]) {
+                swap(nums[i], nums[swapIndex]);
+                swapIndex = i;
+            } else {
+                if (tmpRight <= swapIndex) break;
+                swap(nums[tmpRight--], nums[i]);
+                --i;
+            }
+        }
+        sortStack.push(pair<int, int>(left, swapIndex - 1));
+        sortStack.push(pair<int, int>(swapIndex + 1, right));
+    }
+}
 
 void mergeSort(vector<int> &nums) {
     // 归并排序是一种分治思想的排序

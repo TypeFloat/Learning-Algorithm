@@ -3,6 +3,7 @@
 
 #include <algorithm>
 #include <array>
+#include <climits>
 #include <functional>
 #include <utility>
 #include <vector>
@@ -177,7 +178,36 @@ void mergeSort(vector<int> &nums) {
     }
 }
 
-void countSort(vector<int> &nums) {}
+void countSort(vector<int> &nums) {
+    // 计数排序的思想是如果有n个小于k的数，那k的位置应该就是n
+    // 在寻找n的时候，计数排序并没有基于比较，而是在一个额外空间中计数
+    // 计数排序的时间复杂度时O(n+m),其中n是数组长度，m是数组的最大值最小值的差，
+    // 也是额外空间的长度，也就是计数排序的空间复杂度是O(m)
+    // 所以m的大小是影响计数排序性能的关键因素
+
+    // 求最大最小
+    // 时间复杂度O(n)
+    int minVal = INT_MAX;
+    int maxVal = INT_MIN;
+    for (int num : nums) {
+        minVal = min(minVal, num);
+        maxVal = max(maxVal, num);
+    }
+
+    // 时间复杂度O(n)
+    vector<int> count(maxVal - minVal + 1, 0);
+    for (int num : nums) {
+        count[num - minVal]++;
+    }
+
+    // 时间复杂度O(m)
+    int idx = 0;
+    for (int i = 0; i < count.size(); ++i) {
+        for (int j = 0; j < count[i]; ++j) {
+            nums[idx++] = minVal + i;
+        }
+    }
+}
 
 void bucketSort(vector<int> &nums) {}
 

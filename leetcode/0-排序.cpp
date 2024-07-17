@@ -112,6 +112,12 @@ void bubbleSort(vector<int> &nums) {
 }
 
 void quickSort(vector<int> &nums) {
+    // 快速排序的思想比较简单，但是实现上比较复杂
+    // 其思想是选出一个哨兵元素，然后比该元素小的放在左边，大的放在右边
+    // 此时哨兵元素的位置是正确的了
+    // 然后依次递归左右两侧的元素
+    // 其平均复杂度和最优复杂度是O(nlogn)，最坏情况出现在数据最初就是有序的情况，此时是O(n^2)
+    // 空间复杂度是O(1)
     stack<pair<int, int>> sortStack;
     int left, right, swapIndex, tmpRight;
     pair<int, int> temp;

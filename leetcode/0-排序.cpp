@@ -5,9 +5,9 @@
 #include <array>
 #include <climits>
 #include <functional>
+#include <stack>
 #include <utility>
 #include <vector>
-#include <stack>
 
 using namespace std;
 
@@ -209,12 +209,52 @@ void countSort(vector<int> &nums) {
     }
 }
 
-void bucketSort(vector<int> &nums) {}
+void bucketSort(vector<int> &nums) {
+    // 桶排序工作的原理是将数组分到有限数量的桶里
+    // 每个桶再个别排序（有可能再使用别的排序算法或是以递归方式继续使用桶排序进行排序）
+    // 最后依次把各个桶中的记录列出来形成有序序列
+    // 桶排序是计数排序的扩展版本，计数排序可以看成每个桶只存储相同元素，而桶排序每个桶存储一定范围的元素
+    // 通过映射函数，将待排序数组中的元素映射到各个对应的桶中，对每个桶中的元素进行排序，最后将非空桶中的元素逐个放入原序列中
+    int minVal = INT_MAX, maxVal = INT_MIN;
+    for (int i = 0; i < nums.size(); ++i) {
+        minVal = min(minVal, nums[i]);
+        maxVal = max(maxVal, nums[i]);
+    }
+    vector<vector<int>> buckets((maxVal - minVal + 9) / 10 + 1, vector<int>(0));
+    for (int num : nums) {
+        buckets[(num - minVal) / 10].push_back(num);
+    }
+    int idx = 0;
+    for (vector<int> bucket : buckets) {
+        quickSort(bucket);
+        for (int num : bucket) {
+            nums[idx++] = num;
+        }
+    }
+}
 
-void radixSort(vector<int> &nums) {}
+void radixSort(vector<int> &nums) {
+    // 好抽象的算法，完全不理解啥意思
+    int exp = 0, idx;
+    vector<vector<int>> buckets(10, vector<int>(0));
+    while (true) {
+        for (int num : nums) {
+            buckets[static_cast<int>(num / pow(10, exp)) % 10].push_back(num);
+        }
+        if (buckets[0].size() == nums.size()) break;
+        ++exp;
+        idx = 0;
+        for (vector<int> &bucket : buckets) {
+            for (int num : bucket) {
+                nums[idx++] = num;
+            }
+            bucket.clear();
+        }
+    }
+}
 
 void test(std::function<void(vector<int> &)> sortFunc) {
-    int n = 1000;
+    int n = 100;
     vector<int> nums(n, 0);
     for (int i = 0; i < n; ++i) {
         nums[i] = random() % 2048;

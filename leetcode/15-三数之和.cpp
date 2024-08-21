@@ -8,29 +8,31 @@ using namespace std;
 class Solution {
    public:
     vector<vector<int>> threeSum(vector<int> &nums) {
+        // 两数之和的思路是排序后双指针，三数之和的话加一个外循环，四数之和加两个外循环，以此类推
+        // 需要注意的是，题目要求不可以包含重复的三元组，因此要注意去重的问题
         vector<vector<int>> rtn;
-        sort(nums.begin(), nums.end(), [](int a, int b) { return a < b; });
         int left, right, sum;
-        for (int i = 0; i < nums.size(); ++i) {
-            if (i > 0 && nums[i] == nums[i - 1]) continue;
-            left = i + 1;
-            right = nums.size() - 1;
+        sort(nums.begin(), nums.end());
+        for (int i = 0; i < nums.size() - 2; ++i) {
+            // 去重
+            if (i > 0 && nums[i - 1] == nums[i]) continue;
+            left = i + 1, right = nums.size() - 1;
+            sum = -nums[i];
             while (left < right) {
-                sum = nums[i] + nums[left] + nums[right];
-                if (sum == 0) {
+                if (sum == nums[left] + nums[right]) {
                     rtn.push_back({nums[i], nums[left], nums[right]});
-                    ++left;
-                    while (left < nums.size() && nums[left] == nums[left - 1]) {
+                    // 去重，防止出现 {-4, 2, 2, 2, 2} 答案重复的情况
+                    do {
                         ++left;
-                    }
-                    --right;
-                    while (right >= 0 && nums[right] == nums[right + 1]) {
+                    } while (left < right && nums[left] == nums[left - 1]);
+                    do {
                         --right;
-                    }
-                } else if (sum < 0)
+                    } while (left < right && nums[right] == nums[right] + 1);
+                } else if (sum > nums[left] + nums[right]) {
                     ++left;
-                else
+                } else {
                     --right;
+                }
             }
         }
         return rtn;

@@ -7,16 +7,16 @@ using namespace std;
 class Solution {
    public:
     void moveZeroes(vector<int> &nums) {
-        int left = 0, right = 0;
-        while (right < nums.size()) {
-            if (nums[right] != 0) {
-                nums[left++] = nums[right];
-            }
-            ++right;
+        // 双指针，具体来说是快慢指针，慢指针指向0，快指针指向非零元素，然后交换
+        // 有一个可以优化的点是，可以不执行交换，而是覆盖，这样可以减少操作的次数
+        int slow = -1;
+        while (++slow < nums.size() && nums[slow] != 0);
+        int fast = slow + 1;
+        while (fast < nums.size()) {
+            if (nums[fast] != 0) nums[slow++] = nums[fast];
+            ++fast;
         }
-        while (left < nums.size()) {
-            nums[left++] = 0;
-        }
+        for (int i = slow; i < nums.size(); ++i) nums[slow++] = 0;
     }
 };
 

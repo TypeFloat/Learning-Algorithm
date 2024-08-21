@@ -8,36 +8,26 @@ class Solution {
    public:
     vector<int> spiralOrder(vector<vector<int>> &matrix) {
         vector<int> rtn;
-        int m = matrix.size(), n = matrix[0].size();
-        int left = 0, right = n - 1, up = 0, down = m - 1;
-        while (left < right && up < down) {
-            for (int i = left; i < right; ++i) {
-                rtn.push_back(matrix[up][i]);
-            }
-            for (int i = up; i < down; ++i) {
-                rtn.push_back(matrix[i][right]);
-            }
-            for (int i = right; i > left; --i) {
-                rtn.push_back(matrix[down][i]);
-            }
-            for (int i = down; i > up; --i) {
-                rtn.push_back(matrix[i][left]);
-            }
+        int up = 0, down = matrix.size() - 1, left = 0,
+            right = matrix[0].size() - 1;
+        while (up < down && left < right) {
+            // up
+            for (int i = left; i < right; ++i) rtn.push_back(matrix[up][i]);
+            // right
+            for (int i = up; i < down; ++i) rtn.push_back(matrix[i][right]);
+            // down
+            for (int i = right; i > left; --i) rtn.push_back(matrix[down][i]);
+            // left
+            for (int i = down; i > up; --i) rtn.push_back(matrix[i][left]);
             ++up;
             --down;
             ++left;
             --right;
         }
-        if (left <= right && up <= down) {
-            if (m <= n) {
-                for (int i = left; i <= right; ++i) {
-                    rtn.push_back(matrix[m / 2][i]);
-                }
-            } else {
-                for (int i = up; i <= down; ++i) {
-                    rtn.push_back(matrix[i][n / 2]);
-                }
-            }
+        if (up == down) {
+            for (int i = left; i <= right; ++i) rtn.push_back(matrix[up][i]);
+        } else if (left == right) {
+            for (int i = up; i <= down; ++i) rtn.push_back(matrix[i][left]);
         }
         return rtn;
     }

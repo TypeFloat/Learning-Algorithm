@@ -1,30 +1,24 @@
 #include <gtest/gtest.h>
 
 #include <algorithm>
-#include <unordered_map>
+#include <unordered_set>
 #include <vector>
 
 using namespace std;
 
 class Solution {
-   public:
-    int subarraySum(vector<int> &nums, int k) {
-        unordered_map<int, int> record;
-        record[0] = 1;
+public:
+    int subarraySum(vector<int>& nums, int k) {
+        unordered_multiset<int> record;
         int sum = 0;
-        int count = 0;
-        for (int num : nums) {
+        record.insert(0);
+        int rtn = 0;
+        for (int num: nums) {
             sum += num;
-            if (record.find(sum - k) != record.end()) {
-                count += record[sum - k];
-            }
-            if (record.find(sum) != record.end()) {
-                record[sum]++;
-            } else {
-                record[sum] = 1;
-            }
+            rtn += record.count(sum - k);
+            record.insert(sum);
         }
-        return count;
+        return rtn;
     }
 };
 
@@ -51,5 +45,12 @@ TEST(Q560, CASE3) {
     vector<int> nums = {-1, -1, 1};
     int k = 0;
     int ans = 1;
+    test(nums, k, ans);
+}
+
+TEST(Q560, CASE4) {
+    vector<int> nums = {1, -1, 0};
+    int k = 0;
+    int ans = 3;
     test(nums, k, ans);
 }

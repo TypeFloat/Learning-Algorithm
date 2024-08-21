@@ -7,44 +7,72 @@ using namespace std;
 class Solution {
    public:
     void rotate(vector<vector<int>> &matrix) {
-        int circleCount = 0;
-        int startX, startY, targetX, targetY;
-        int tmpVal, count, step;
-        while (circleCount < matrix.size() / 2) {
-            startX = circleCount;
-            startY = circleCount;
-            targetX = circleCount;
-            targetY = circleCount;
-            count = max(1, static_cast<int>(
-                               pow(matrix.size() - 2 * circleCount, 2) -
-                               pow(matrix.size() - 2 * circleCount - 2, 2)));
-            while (count > 0) {
-                step = (matrix.size() - 1 - 2 * circleCount);
-                tmpVal = matrix[startX][startY];
+        // 纯纯的模拟问题，没什么算法，纯编程能力的考察
+        for (int i = 0; i < matrix.size() / 2; ++i) {
+            for (int j = i; j < matrix.size() - i - 1; ++j) {
+                int row = i, col = j, tmp = matrix[row][col];
+                int direction = 0;
                 do {
-                    int localStep = step;
-                    while (localStep--) {
-                        if (targetX == circleCount &&
-                            targetY < matrix.size() - circleCount - 1)
-                            ++targetY;
-                        else if (targetX < matrix.size() - circleCount - 1 &&
-                                 targetY == matrix.size() - circleCount - 1)
-                            ++targetX;
-                        else if (targetX == matrix.size() - circleCount - 1 &&
-                                 targetY > circleCount)
-                            --targetY;
-                        else if (targetY == circleCount &&
-                                 targetX > circleCount)
-                            --targetX;
-                    }
-                    swap(tmpVal, matrix[targetX][targetY]);
-                    --count;
-                } while (targetX != startX || targetY != startY);
-                ++targetY;
-                ++startY;
+                    pair<int, int> next =
+                        convert(row, col, matrix.size() - 2 * i, matrix.size(),
+                                direction);
+                    row = next.first;
+                    col = next.second;
+                    swap(tmp, matrix[row][col]);
+
+                } while (row != i || col != j);
             }
-            ++circleCount;
         }
+    }
+
+    pair<int, int> convert(int row, int col, int size, int maxSize,
+                           int &direction) {
+        int count = size - 1;
+        int minRange = (maxSize - size) / 2;
+        int maxRange = (maxSize + size) / 2 - 1;
+        while (count) {
+            if (direction == 0) {
+                while (count && col < maxRange) {
+                    ++col;
+                    --count;
+                }
+                if (count != 0)
+                    ++direction;
+                else
+                    return {row, col};
+            }
+            if (direction == 1) {
+                while (count && row < maxRange) {
+                    ++row;
+                    --count;
+                }
+                if (count != 0)
+                    ++direction;
+                else
+                    return {row, col};
+            }
+            if (direction == 2) {
+                while (count && col > minRange) {
+                    --col;
+                    --count;
+                }
+                if (count != 0)
+                    ++direction;
+                else
+                    return {row, col};
+            }
+            if (direction == 3) {
+                while (count && row > minRange) {
+                    --row;
+                    --count;
+                }
+                if (count != 0)
+                    direction = 0;
+                else
+                    return {row, col};
+            }
+        }
+        return {row, col};
     }
 };
 

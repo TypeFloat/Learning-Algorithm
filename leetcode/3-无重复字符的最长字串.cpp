@@ -8,21 +8,14 @@ using namespace std;
 class Solution {
    public:
     int lengthOfLongestSubstring(string s) {
-        if (s.size() == 0) return 0;
+        // 使用滑动窗口维护字符串，并使用计数器记录滑动窗口内字符串的字母出现次数即可
+        unordered_map<char, int> counter;
         int maxLength = 0;
-        unordered_map<char, int> record;
         int left = 0, right = -1;
-        char key;
-        while (right < static_cast<int>(s.size()) - 1) {
-            ++right;
-            key = s[right];
-            if (record.find(key) == record.end()) {
-                record[key] = right;
-            } else if (record[key] >= left) {
-                left = record[key] + 1;
-                record[key] = right;
-            } else {
-                record[key] = right;
+        while (++right < s.size()) {
+            counter[s[right]]++;
+            while (counter[s[right]] > 1) {
+                counter[s[left++]]--;
             }
             maxLength = max(maxLength, right - left + 1);
         }

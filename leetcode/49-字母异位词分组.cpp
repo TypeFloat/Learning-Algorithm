@@ -2,6 +2,7 @@
 
 #include <algorithm>
 #include <string>
+#include <unordered_map>
 #include <vector>
 
 using namespace std;
@@ -9,32 +10,27 @@ using namespace std;
 class Solution {
    public:
     vector<vector<string>> groupAnagrams(vector<string> &strs) {
+        // 使用字母出现次数作为哈希值，用字典进行统计即可，关键在于下民啊的strToHash
         unordered_map<string, vector<string>> record;
+        for (string &str : strs) {
+            string hash = this->strToHash(str);
+            record[hash].push_back(str);
+        }
         vector<vector<string>> rtn;
-        for (string str : strs) {
-            vector<int> count(26, 0);
-            for (char ch : str) {
-                count[ch - 'a']++;
-            }
-            string key = this->vector2hash(count);
-            if (record.find(key) != record.end())
-                record[key].push_back(str);
-            else
-                record[key] = {str};
-        }
-        for (auto [key, value] : record) {
-            rtn.push_back(value);
-        }
+        for (auto iter = record.begin(); iter != record.end(); ++iter)
+            rtn.push_back(iter->second);
         return rtn;
-    };
+    }
 
-    string vector2hash(vector<int> &count) {
-        string str = "";
-        for (int i = 0; i < count.size(); ++i) {
-            str += 'a' + i;
-            str += to_string(count[i]);
+    string strToHash(string &str) {
+        vector<int> counter(26, 0);
+        for (char ch : str) {
+            counter[ch - 'a']++;
         }
-        return str;
+        string hash = "";
+        for (int num : counter)
+            hash += (to_string(num) + ":");
+        return hash;
     }
 };
 

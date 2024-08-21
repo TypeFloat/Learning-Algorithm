@@ -1,6 +1,8 @@
 #include <gtest/gtest.h>
 
 #include <algorithm>
+#include <climits>
+#include <numeric>
 #include <vector>
 
 using namespace std;
@@ -8,21 +10,19 @@ using namespace std;
 class Solution {
    public:
     int trap(vector<int> &height) {
-        int sum = 0;
-        vector<int> leftMax(height.size(), 0);
-        vector<int> rightMax(height.size(), 0);
-        leftMax[0] = height[0];
-        for (int i = 1; i < leftMax.size(); ++i) {
-            leftMax[i] = max(height[i], leftMax[i - 1]);
-        }
-        rightMax[rightMax.size() - 1] = height[height.size() - 1];
-        for (int i = rightMax.size() - 2; i >= 0; --i) {
-            rightMax[i] = max(height[i], rightMax[i + 1]);
-        }
+        int maxHeight;
+        vector<int> water(height.size(), INT_MAX);
+        maxHeight = 0;
         for (int i = 0; i < height.size(); ++i) {
-            sum += min(leftMax[i], rightMax[i]) - height[i];
+            maxHeight = max(maxHeight, height[i]);
+            water[i] = min(water[i], maxHeight - height[i]);
         }
-        return sum;
+        maxHeight = 0;
+        for (int i = height.size() - 1; i >= 0; --i) {
+            maxHeight = max(maxHeight, height[i]);
+            water[i] = min(water[i], maxHeight - height[i]);
+        }
+        return accumulate(water.begin(), water.end(), 0);
     }
 };
 

@@ -8,20 +8,20 @@ using namespace std;
 class Solution {
    public:
     int firstMissingPositive(vector<int> &nums) {
+        // 具体的思想是让1出现的0号元素位置上，2出现在1号元素位置上，以此类推
+        // 如果数组恰是1到n排列的，那经过上述排列后，数组就是有序的了，
+        // 如果不是，那数组第k个元素应当不等于k+1
+        // 无论是哪一种情况，再次遍历数组都可以得到答案
+        int num;
         for (int i = 0; i < nums.size(); ++i) {
-            if (nums[i] <= 0 || nums[i] > nums.size())
-                continue;
-            else
-                while (nums[i] > 0 && nums[i] <= nums.size() &&
-                       i != nums[i] - 1 && nums[i] != nums[nums[i] - 1]) {
-                    swap(nums[i], nums[nums[i] - 1]);
-                };
+            num = nums[i];
+            while (num > 0 && num - 1 < nums.size() && nums[num - 1] != num)
+                swap(nums[num - 1], num);
         }
-        int ptr = 0;
-        for (ptr = 0; ptr < nums.size(); ++ptr) {
-            if (nums[ptr] != ptr + 1) break;
+        for (int i = 0; i < nums.size(); ++i) {
+            if (nums[i] != i + 1) return i + 1;
         }
-        return ptr + 1;
+        return nums.size() + 1;
     }
 };
 
@@ -57,5 +57,17 @@ TEST(Q41, CASE4) {
 TEST(Q41, CASE5) {
     vector<int> nums = {3, 1};
     int ans = 2;
+    test(nums, ans);
+}
+
+TEST(Q41, CASE6) {
+    vector<int> nums = {1};
+    int ans = 2;
+    test(nums, ans);
+}
+
+TEST(Q41, CASE7) {
+    vector<int> nums = {2, 1};
+    int ans = 3;
     test(nums, ans);
 }

@@ -1,5 +1,6 @@
 #include <gtest/gtest.h>
 
+#include <deque>
 #include <queue>
 #include <vector>
 
@@ -8,24 +9,20 @@ using namespace std;
 class Solution {
    public:
     vector<int> maxSlidingWindow(vector<int> &nums, int k) {
+        // 类似于优先队列的方法，但是是使用双端队列的形式实现的
         deque<int> maxQueue;
-        vector<int> rtn;
-        for (int i = 0; i < nums.size(); ++i) {
-            // 删除窗口外的元素
-            if (!maxQueue.empty() && maxQueue.front() <= i - k)
-                maxQueue.pop_front();
-
-            // 更新窗口内的元素
-            if (maxQueue.empty()) {
-                maxQueue.push_back(i);
-            } else {
-                while (!maxQueue.empty() && nums[i] > nums[maxQueue.back()]) {
-                    maxQueue.pop_back();
-                }
-                maxQueue.push_back(i);
-            }
-            if (i >= k - 1) rtn.push_back(nums[maxQueue.front()]);
+        for (int i = 0; i < k; ++i) {
+            while (!maxQueue.empty() && nums[i] > maxQueue.back()) maxQueue.pop_back();
+            maxQueue.push_back(nums[i]);
         }
+        vector<int> rtn;
+        for (int i = k; i < nums.size(); ++i) {
+            rtn.push_back(maxQueue.front());
+            if (nums[i - k] == maxQueue.front()) maxQueue.pop_front();
+            while (!maxQueue.empty() && nums[i] > maxQueue.back()) maxQueue.pop_back();
+            maxQueue.push_back((nums[i]));
+        }
+        rtn.push_back(maxQueue.front());
         return rtn;
     }
 };
@@ -47,5 +44,12 @@ TEST(Q239, CASE2) {
     vector<int> nums = {1};
     int k = 1;
     vector<int> ans = {1};
+    test(nums, k, ans);
+}
+
+TEST(Q239, CASE3) {
+    vector<int> nums = {-7, -8, 7, 5, 7, 1, 6, 0};
+    int k = 4;
+    vector<int> ans = {7, 7, 7, 7, 7};
     test(nums, k, ans);
 }

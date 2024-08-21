@@ -1,54 +1,12 @@
 #include <gtest/gtest.h>
 
-#include <memory>
-#include <regex>
 #include <vector>
 using namespace std;
 
 class Solution {
    public:
     bool searchMatrix(vector<vector<int>> &matrix, int target) {
-        int left = 0, right = matrix[0].size() - 1, up = 0,
-            down = matrix.size() - 1, mid, count = 0;
-        while (1) {
-            if (left > right) break;
-            while (left <= right) {
-                mid = (right + left) / 2;
-                if (matrix[up][mid] == target) {
-                    return true;
-                } else if (matrix[up][mid] < target) {
-                    left = mid + 1;
-                } else {
-                    right = mid - 1;
-                }
-            }
-            if (matrix[up][mid] > target)
-                right = mid - 1;
-            else
-                right = mid;
-            left = count;
-            ++up;
 
-            if (up > down) break;
-            while (up <= down) {
-                mid = (up + down) / 2;
-                if (matrix[mid][left] == target) {
-                    return true;
-                } else if (matrix[mid][left] < target) {
-                    up = mid + 1;
-                } else {
-                    down = mid - 1;
-                }
-            }
-            if (matrix[mid][left] > target)
-                down = mid - 1;
-            else
-                down = mid;
-            up = count + 1;
-            ++left;
-            ++count;
-        }
-        return false;
     }
 };
 

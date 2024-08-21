@@ -1,5 +1,6 @@
 #include <gtest/gtest.h>
 
+#include <array>
 #include <vector>
 
 using namespace std;
@@ -7,23 +8,21 @@ using namespace std;
 class Solution {
    public:
     void rotate(vector<int> &nums, int k) {
-        if (k == 0) return;
-        int fromPtr, toPtr, fromVal, toVal;
-        int startIdx = 0, count = 0;
-        while (count < nums.size()) {
-            fromPtr = startIdx;
-            if (fromPtr >= nums.size()) break;
-            fromVal = nums[fromPtr];
+        // 其实最好的方法是通过求解 nums.size() 和 k 的最大公约数来作为循环次数
+        // 但是数学推导比较复杂，这里使用一个额外的变量count做交换元素的次数记录也可以
+        int count = 0;
+        int idx, nextIdx, tmp;
+        int i = 0;
+        while (count != nums.size()) {
+            idx = i;
+            tmp = nums[i];
             do {
-                toPtr = (fromPtr + k) % nums.size();
-                toVal = nums[toPtr];
-                nums[toPtr] = fromVal;
-                fromVal = toVal;
-                fromPtr = toPtr;
+                nextIdx = (idx + k) % nums.size();
+                swap(nums[nextIdx], tmp);
                 ++count;
-
-            } while (fromPtr != startIdx);
-            ++startIdx;
+                idx = nextIdx;
+            } while (idx != i);
+            ++i;
         }
     }
 };

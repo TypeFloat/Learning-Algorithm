@@ -7,6 +7,7 @@ using namespace std;
 class Solution {
    public:
     vector<vector<int>> merge(vector<vector<int>> &intervals) {
+        // 区间类型的题目一般的解法都是先排序，通过排序确定好左（右）区间的关系，再判断右（左）区间的关系
         sort(intervals.begin(), intervals.end(),
              [](vector<int> &a, vector<int> &b) {
                  if (a[0] == b[0])
@@ -16,14 +17,13 @@ class Solution {
              });
         vector<vector<int>> rtn;
         int left = intervals[0][0], right = intervals[0][1];
-        for (auto iter = intervals.begin() + 1; iter != intervals.end();
-             ++iter) {
-            if ((*iter)[0] > right) {
+        for (int i = 1; i < intervals.size(); ++i) {
+            if (right < intervals[i][0]) {
                 rtn.push_back({left, right});
-                left = (*iter)[0];
-                right = (*iter)[1];
+                left = intervals[i][0];
+                right = intervals[i][1];
             } else
-                right = max(right, (*iter)[1]);
+                right = max(right, intervals[i][1]);
         }
         rtn.push_back({left, right});
         return rtn;

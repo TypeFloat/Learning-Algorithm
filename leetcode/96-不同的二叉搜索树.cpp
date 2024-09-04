@@ -1,0 +1,29 @@
+#include <gtest/gtest.h>
+#include <vector>
+
+using namespace std;
+
+class Solution {
+   public:
+    int numTrees(int n) {
+        vector<int> dp(n + 1);
+        dp[0] = 1;
+        for (int i = 1; i <= n; i++) {
+            for (int j = 1; j <= i; j++) {
+                dp[i] += dp[j - 1] * dp[i - j];
+            }
+        }
+        return dp[n];
+    }
+};
+
+void test(int n, int ans) {
+    Solution solution = Solution();
+    ASSERT_EQ(solution.numTrees(n), ans);
+}
+
+TEST(Q96, CASE1) {
+    int n = 3;
+    int ans = 5;
+    test(n, ans);
+}
